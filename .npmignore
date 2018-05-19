@@ -3,6 +3,7 @@ src/
 node_modules/
 target/
 tests/
+coverage/
 .git
 .babelrc
 .editorconfig
