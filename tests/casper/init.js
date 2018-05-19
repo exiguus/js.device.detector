@@ -5,7 +5,10 @@
   printTestStartInfo
   getTestCaptureName
   objectCount
+  getBrowserTestData
 */
+// if run casper not with test
+// phantom.injectJs(config.path + 'casper.config.js');
 // options
 const config = {
   'count': 22,
@@ -19,92 +22,45 @@ const config = {
     'width': 1200,
     'height': 1000,
   },
-  'browser': {
-    'safariMac': {
-      'userAgentString':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 ' +
-        '(KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
-      'test': {
-        'browserVersion': '9',
-        'browserName': 'Apple Safari',
-        'browserId': 'safari',
-        'osVersion': '10_11_6',
-        'osVersionString': '10_11_6',
-        'osVersionCategories': '{"major":10,"minor":11,"bugfix":6}',
-        'osVersionMajor': '10',
-        'osVersionMinor': '11',
-        'osVersionBugfix': '6',
-        'osName': 'Apple Mac OS X',
-        'osId': 'macos',
-      },
-    },
-    'chromeMac': {
-      'userAgentString':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 ' +
-        '(KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36',
-      'test': {
-        'browserVersion': '58',
-        'browserName': 'Google Chrome',
-        'browserId': 'chrome',
-        'osVersion': '10_12_4',
-        'osVersionString': '10_12_4',
-        'osVersionCategories': '{"major":10,"minor":12,"bugfix":4}',
-        'osVersionMajor': '10',
-        'osVersionMinor': '12',
-        'osVersionBugfix': '4',
-        'osName': 'Apple Mac OS X',
-        'osId': 'macos',
-      },
-    },
-    'msieWindows8': {
-      'userAgentString':
-        'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2)',
-      'test': {
-        'browserVersion': '10',
-        'browserName': 'Microsoft Internet Explorer',
-        'browserId': 'msie',
-        'osVersion': '6.2',
-        'osVersionString': '6.2',
-        'osVersionCategories': '{"major":6,"minor":2,"bugfix":0}',
-        'osVersionMajor': '6',
-        'osVersionMinor': '2',
-        'osVersionBugfix': '0',
-        'osName': 'Microsoft Windows 8',
-        'osId': 'windows8',
-      },
-    },
-  },
   'capture': {
     'path': '../screenshots/',
     'fileEnding': '.png',
     'wait': 500,
   },
   'debug': false,
+  'browsers': {},
 };
+// cli
+if (casper.cli.options.path.length > 0) {
+  config.url.path = casper.cli.options.path;
+}
+// inject browserTestData
+phantom.injectJs(config.path + 'browser.config.js');
+config.browsers = getBrowserTestData(); // eslint-ignore-line no-undef
 
 // inject helper
 phantom.injectJs(config.path + 'helper.js');
 
-Object.keys(config.browser).forEach(function(key) {
+Object.keys(config.browsers).forEach(function(key) {
   // begin test
 
   casper.test.begin(
     config.title,
-    objectCount(config.browser[key].test) * 2,
+    objectCount(config.browsers[key].test) * 2,
     function suite(test) {
-      printTestStartInfo(
-        config.title
+      printTestInfo(
+        'Url:       ' + config.url.origin + config.url.path
       );
       printTestInfo(
         'Name:      ' + key
       );
       printTestInfo(
-        'UserAgent: ' + config.browser[key].userAgentString
+        'UserAgent: ' + config.browsers[key].userAgentString
       );
 
       // start test
       casper.start(config.url.origin, function() {
-        casper.userAgent(config.browser[key].userAgentString);
+        casper.userAgent(config.browsers[key].userAgentString);
       });
 
       // open test
@@ -116,7 +72,7 @@ Object.keys(config.browser).forEach(function(key) {
         // check elements
         //
         // browser
-        Object.keys(config.browser[key].test).forEach(function(id) {
+        Object.keys(config.browsers[key].test).forEach(function(id) {
           casper.then(function() {
             var element = '#' + id; // eslint-disable-line no-var
             var content = // eslint-disable-line no-var
@@ -125,14 +81,14 @@ Object.keys(config.browser).forEach(function(key) {
               console.info( // eslint-disable-line no-console
                 id,
                 element,
-                config.browser[key].test[id],
-                config.browser[key].userAgentString
+                config.browsers[key].test[id],
+                config.browsers[key].userAgentString
               );
             }
             test.assertExists(element, element + ' element exist');
             test.assertEquals(
               content,
-              config.browser[key].test[id],
+              config.browsers[key].test[id],
               element + ' value is "' + content + '"'
             );
           });

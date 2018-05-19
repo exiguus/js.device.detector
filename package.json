@@ -44,8 +44,10 @@
     "build": "grunt",
     "dist": "npm run build",
     "test": "npm run lint && npm run build && npm run test-integration",
-    "test-integration": "npm run serve && npm run test-casper && npm run stop",
-    "test-casper": "node_modules/casperjs/bin/casperjs test ./tests/casper/init.js",
+    "test-integration": "npm run serve && npm run test-casper-dist && npm run test-casper-dist-min && npm run stop",
+    "test-casper-dev": "node_modules/casperjs/bin/casperjs test ./tests/casper/init.js",
+    "test-casper-dist": "node_modules/casperjs/bin/casperjs test ./tests/casper/init.js --path=/src/index.jquery.test.html",
+    "test-casper-dist-min": "node_modules/casperjs/bin/casperjs test ./tests/casper/init.js --path=/src/index.jquery.min.test.html",
     "serve": "node_modules/serve/bin/serve.js --silent --local --port 7357 ./ &",
     "lint": "node_modules/eslint/bin/eslint.js --fix src/js/**",
     "stop": "killall node"
