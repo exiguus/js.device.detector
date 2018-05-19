@@ -29,7 +29,6 @@
     "jquery": "^3.3.1",
     "jsdoc": "^3.5.5",
     "load-grunt-configs": "^1.0.0",
-    "npm": "^5.10.0",
     "phantomjs-prebuilt": "^2.1.16",
     "serve": "^6.5.7",
     "time-grunt": "^1.4.0",
@@ -71,8 +70,8 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 8.0.0",
+    "npm": ">= 6.0.1"
   },
   "browserslist": [
     "> 1%",
