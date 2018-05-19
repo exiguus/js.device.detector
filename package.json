@@ -1,0 +1,82 @@
+{
+  "name": "js.device.detector",
+  "version": "1.0.0",
+  "description": "jQuery Plugin to get Device and Browser Information",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "casperjs": "^1.1.4",
+    "cross-env": "^5.1.5",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "grunt": "^1.0.2",
+    "grunt-banner": "^0.6.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-eslint": "^20.1.0",
+    "grunt-jsdoc": "^2.2.1",
+    "grunt-stripcomments": "^0.7.2",
+    "html-webpack-plugin": "^3.2.0",
+    "jasmine-core": "^3.1.0",
+    "jit-grunt": "^0.10.0",
+    "jquery": "^3.3.1",
+    "jsdoc": "^3.5.5",
+    "load-grunt-configs": "^1.0.0",
+    "npm": "^5.10.0",
+    "phantomjs-prebuilt": "^2.1.16",
+    "serve": "^6.5.7",
+    "time-grunt": "^1.4.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
+  },
+  "scripts": {
+    "start": "npm install && npm run dev",
+    "dev": "npm run dev-webpack",
+    "dev-webpack": "cross-env NODE_ENV=dev webpack-dev-server --progress --mode development --config webpack.config.dev.js",
+    "build": "grunt",
+    "dist": "npm run build",
+    "test": "npm run lint && npm run build && npm run test-integration",
+    "test-integration": "npm run serve && npm run test-casper && npm run stop",
+    "test-casper": "node_modules/casperjs/bin/casperjs test ./tests/casper/init.js",
+    "serve": "node_modules/serve/bin/serve.js --silent --local --port 7357 ./ &",
+    "lint": "node_modules/eslint/bin/eslint.js --fix src/js/**",
+    "stop": "killall node"
+  },
+  "keywords": [
+    "browser",
+    "device",
+    "navigator",
+    "userAgent",
+    "user-agent",
+    "detect",
+    "detector",
+    "information",
+    "matrix",
+    "browsermatrix"
+  ],
+  "author": "Simon Gattner <npm@0x38.de>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exiguus/js.device.detector.git"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
