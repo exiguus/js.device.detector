@@ -16,7 +16,7 @@ config.options = {
     // dist folder with minified and optimized files
     dist: 'dist',
     // doc folder jsdoc3
-    doc: 'docs',
+    docs: 'docs',
   },
   name: {
     plugin: 'device.detector',
