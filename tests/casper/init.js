@@ -2,14 +2,15 @@
   casper
   phantom
   printTestInfo
-  objectCount
+  getObjectCount
   getBrowserTestData
   getTestCaptureName
+  getRandomSlicedArray
+  getWithCorrectType
 */
-// if casper do not run with test param
-// phantom.injectJs(config.path + 'casper.config.js');
-// options
-const config = {
+
+/* eslint-disable no-var, no-invalid-this */
+var config = {
   'count': 22,
   'url': {
     'origin': 'http://localhost:7357',
@@ -27,9 +28,15 @@ const config = {
     'path': 'tests/screenshots/',
     'fileEnding': '.png',
   },
+  'fuzz': false,
   'debug': false,
   'browsers': {},
 };
+// inject browserTestData
+phantom.injectJs(config.path + 'browser.config.js');
+config.browsers = getBrowserTestData();
+// inject helper
+phantom.injectJs(config.path + 'casper.helper.js');
 // cli
 if (casper.cli.options.path !== undefined) {
   config.url.path = casper.cli.options.path;
@@ -37,17 +44,23 @@ if (casper.cli.options.path !== undefined) {
 if (casper.cli.options.capture !== undefined) {
   config.capture.enable = true;
 }
-// inject browserTestData
-phantom.injectJs(config.path + 'browser.config.js');
-config.browsers = getBrowserTestData(); // eslint-ignore-line no-undef
-// inject helper
-phantom.injectJs(config.path + 'casper.helper.js');
+var cases = [];
+if (casper.cli.options.fuzz !== undefined) {
+  config.fuzz.enable = true;
+  config.capture.enable = false;
+  cases = getRandomSlicedArray(Object.keys(config.browsers));
+} else {
+  cases = Object.keys(config.browsers);
+}
 // tests
-Object.keys(config.browsers).forEach(function(key) {
+printTestInfo(
+  'Run ' + cases.length + ' ' + config.title + ' tests:'
+);
+cases.forEach(function(key) {
   // begin test
   casper.test.begin(
     config.title,
-    (objectCount(config.browsers[key].test) * 3),
+    (getObjectCount(config.browsers[key].test) * 3),
     function suite(test) {
       printTestInfo(
         'Url:       ' + config.url.origin + config.url.path
@@ -61,14 +74,14 @@ Object.keys(config.browsers).forEach(function(key) {
       // start test
       casper.start(config.url.origin, function() {
         casper.userAgent(config.browsers[key].userAgentString);
-        this.viewport( // eslint-disable-line no-invalid-this
+        this.viewport(
           config.viewport.width,
           config.viewport.height
         );
       });
       // open path
       casper.thenOpen(config.url.origin + config.url.path, function() {
-        if (config.debug === true) console.info(this.getCurrentUrl()); // eslint-disable-line no-invalid-this, no-console, max-len
+        if (config.debug === true) console.info(this.getCurrentUrl()); // eslint-disable-line no-console, max-len
         // check info object preparation
         config.getInfo = casper.evaluate(function() {
             return $.fn.deviceDetector.getInfo();
@@ -78,9 +91,9 @@ Object.keys(config.browsers).forEach(function(key) {
       // check elements
       Object.keys(config.browsers[key].test).forEach(function(id) {
         casper.then(function() {
-          var element = '#' + id; // eslint-disable-line no-var
-          var content = // eslint-disable-line no-var
-            this.getHTML(element); // eslint-disable-line no-invalid-this
+          var element = '#' + id;
+          var content =
+            this.getHTML(element);
           if (config.debug === true) {
             console.info( // eslint-disable-line no-console
               id,
@@ -93,31 +106,40 @@ Object.keys(config.browsers).forEach(function(key) {
           test.assertExists(element, element + ' element exist');
           // check element equal
           test.assertEquals(
-            content,
-            config.browsers[key].test[id],
-            element + ' content is equal "' + content + '"'
+            (content === config.browsers[key].test[id]),
+            true,
+            element + ' content is equal ' + content
           );
           // check info object equal
+          var subject = (typeof config.getInfo[id] === 'object') ?
+            JSON.stringify(
+              config.getInfo[id]
+            ) :
+            config.getInfo[id];
+          var expected = (typeof config.getInfo[id] === 'object') ?
+            JSON.stringify(
+              getWithCorrectType(
+                config.getInfo[id],
+                config.browsers[key].test[id]
+              )
+            ) : getWithCorrectType(
+              config.getInfo[id],
+              config.browsers[key].test[id]
+            );
           test.assertEquals(
-            (typeof config.getInfo[id] === 'object') ?
-              config.browsers[key].test[id] =
-                new Object(config.browsers[key].test[id]) : // eslint-disable-line no-new-object, max-len
-              config.getInfo[id].toString(),
-            config.browsers[key].test[id],
-            config.browsers[key].test[id] +
-              ' getInfo[key] value is equal ' +
-              ((typeof config.getInfo[id] === 'object') ?
-                JSON.stringify(config.getInfo[id]) : config.getInfo[id])
+            (subject === expected),
+            true,
+            'getInfo.' + key + ' value is equal ' + expected
           );
         });
       });
       // capture test
       if (config.capture.enable === true) {
         casper.then(function() {
-          this.wait( // eslint-disable-line no-invalid-this
+          this.wait(
             config.capture.wait,
             function() {
-              this.capture( // eslint-disable-line no-invalid-this
+              this.capture(
                 getTestCaptureName(key),
                 {
                   top: 0,
