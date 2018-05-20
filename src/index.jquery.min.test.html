@@ -29,6 +29,20 @@
             article {
               display: block;
             }
+            section {
+              width: 25%;
+              float: left;
+            }
+            section:nth-child(6n+6) {
+              clear: left;
+            }
+          }
+
+          @media (max-width: 480px) {
+            section {
+              width: 50%;
+              float: left;
+            }
           }
 
           header {
@@ -189,7 +203,7 @@
                 <dt>Edge</dt>
                 <dd id="edge"></dd>
                 <dt>IE Mobile</dt>
-                <dd id="iemobile"></dd>
+                <dd id="ieMobile"></dd>
                 <dt>Windows Phone</dt>
                 <dd id="windowsPhone"></dd>
                 <dt>Windows</dt>
@@ -202,7 +216,7 @@
                 <dt>Opera</dt>
                 <dd id="opera"></dd>
                 <dt>Opera Mini</dt>
-                <dd id="opera-mini"></dd>
+                <dd id="operaMini"></dd>
               </dl>
             </section>
             <section>
@@ -227,54 +241,54 @@
         <script src="../dist//jquery.device.detector.min.js"></script>
         <script>
           $.fn.deviceDetector({'names': {'firefox': {'name': 'Custom Mozilla Firefox Name'}}})
-          var b = $.fn.deviceDetector;
+          var d = $.fn.deviceDetector;
           // current browser
           var userAgentString = navigator.userAgent || navigator.appVersion;
           $('#useragent').text(userAgentString);
           // General
-          $('#supported').text(b.isSupported());
-          $('#mobile').text(b.isMobile());
-          $('#desktop').text(b.isDesktop());
+          $('#supported').text(d.isSupported());
+          $('#mobile').text(d.isMobile());
+          $('#desktop').text(d.isDesktop());
           // Browser
-          $('#browserVersion').text(b.getBrowserVersion());
-          $('#browserName').text(b.getBrowserName());
-          $('#browserId').text(b.getBrowserId());
+          $('#browserVersion').text(d.getBrowserVersion());
+          $('#browserName').text(d.getBrowserName());
+          $('#browserId').text(d.getBrowserId());
           // OS
-          console.log(b.getOsVersionCategories());
-          $('#osVersion').text(b.getOsVersion());
-          $('#osVersionString').text(b.getOsVersionString());
-          $('#osVersionCategories').text(JSON.stringify(b.getOsVersionCategories()));
-          $('#osVersionMajor').text(b.getOsVersionMajor());
-          $('#osVersionMinor').text(b.getOsVersionMinor());
-          $('#osVersionBugfix').text(b.getOsVersionBugfix());
-          $('#osName').text(b.getOsName());
-          $('#osId').text(b.getOsId());
+          console.log(d.getOsVersionCategories());
+          $('#osVersion').text(d.getOsVersion());
+          $('#osVersionString').text(d.getOsVersionString());
+          $('#osVersionCategories').text(JSON.stringify(d.getOsVersionCategories()));
+          $('#osVersionMajor').text(d.getOsVersionMajor());
+          $('#osVersionMinor').text(d.getOsVersionMinor());
+          $('#osVersionBugfix').text(d.getOsVersionBugfix());
+          $('#osName').text(d.getOsName());
+          $('#osId').text(d.getOsId());
           // Apple
-          $('#safari').text(b.isSafari());
-          $('#iphone').text(b.isIphone());
-          $('#ipad').text(b.isIpad());
-          $('#ios').text(b.isIos());
-          $('#macos').text(b.isMacos());
+          $('#safari').text(d.isSafari());
+          $('#iphone').text(d.isIphone());
+          $('#ipad').text(d.isIpad());
+          $('#ios').text(d.isIos());
+          $('#macos').text(d.isMacos());
           // Google
-          $('#chrome').text(b.isChrome());
-          $('#android').text(b.isAndroid());
+          $('#chrome').text(d.isChrome());
+          $('#android').text(d.isAndroid());
           // Mozilla
-          $('#firefox').text(b.isFirefox());
+          $('#firefox').text(d.isFirefox());
           // Microsoft
-          $('#ie').text(b.isIe());
-          $('#msie').text(b.isMsie());
-          $('#edge').text(b.isEdge());
-          $('#iemobile').text(b.isIeMobile());
-          $('#windowsPhone').text(b.isWindowsPhone());
-          $('#windows').text(b.isWindows());
+          $('#ie').text(d.isIe());
+          $('#msie').text(d.isMsie());
+          $('#edge').text(d.isEdge());
+          $('#ieMobile').text(d.isIeMobile());
+          $('#windowsPhone').text(d.isWindowsPhone());
+          $('#windows').text(d.isWindows());
           // Opera
-          $('#opera').text(b.isOpera());
-          $('#opera-mini').text(b.isOperaMini());
+          $('#opera').text(d.isOpera());
+          $('#operaMini').text(d.isOperaMini());
           // BlackBerry
-          $('#blackberry').text(b.isBlackberry);
+          $('#blackberry').text(d.isBlackberry);
           // other
-          $('#linux').text(b.isLinux());
-          $('#bsd').text(b.isBsd());
+          $('#linux').text(d.isLinux());
+          $('#bsd').text(d.isBsd());
           $('dl dd').each(function () {
             var _this = $(this);
             var status = _this.text();

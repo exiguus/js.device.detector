@@ -1,21 +1,22 @@
 /* globals
   casper
+  config
 */
 /* eslint-disable require-jsdoc,  no-unused-vars, no-var */
 function printTestInfo(string) {
-  casper.echo('\n/** ' + string + ' **/', 'INFO');
+  casper.echo('INFO: ' + string, 'INFO');
 }
+
 function printTestInfos(string) {
   casper.echo(string);
 }
-function printTestStartInfo(string) {
-  casper.echo('\n/*** START ' + string + ' test ***/', 'INFO');
-}
 
-function getTestCaptureName(id, capture) {
-  return capture.path + id +
-    '-' + new Date().getTime() +
-    '.' + capture.fileEnding;
+function getTestCaptureName(id, timestamp) {
+  var unixtime = timestamp === undefined ? '' : new Date().getTime();
+  return config.capture.path +
+    id +
+    unixtime +
+    config.capture.fileEnding;
 }
 
 function objectCount(obj) {

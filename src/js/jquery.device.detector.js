@@ -452,6 +452,50 @@
   };
 
   /**
+   * Method to get all available device and browser informations.
+   * @function external:"jQuery.fn.deviceDetector".getInfo
+   * @return {object} The device and browser infromation.
+   */
+
+  $.fn.deviceDetector.getInfo = function() {
+    return {
+      'browserVersion': this.getBrowserVersion(),
+      'browserName': this.getBrowserName(),
+      'browserId': this.getBrowserId(),
+      'osVersion': this.getOsVersion(),
+      'osVersionString': this.getOsVersionString(),
+      'osVersionCategories': this.getOsVersionCategories(),
+      'osVersionMajor': this.getOsVersionMajor(),
+      'osVersionMinor': this.getOsVersionMinor(),
+      'osVersionBugfix': this.getOsVersionBugfix(),
+      'osName': this.getOsName(),
+      'osId': this.getOsId(),
+      'supported': isSupported(),
+      'mobile': this.isMobile(),
+      'desktop': this.isDesktop(),
+      'safari': this.isSafari(),
+      'iphone': this.isIphone(),
+      'ipad': this.isIpad(),
+      'ios': this.isIos(),
+      'macos': this.isMacos(),
+      'chrome': this.isChrome(),
+      'android': this.isAndroid(),
+      'firefox': this.isFirefox(),
+      'ie': this.isIe(),
+      'msie': this.isMsie(),
+      'edge': this.isEdge(),
+      'ieMobile': this.isIeMobile(),
+      'windowsPhone': this.isWindowsPhone(),
+      'windows': this.isWindows(),
+      'opera': this.isOpera(),
+      'operaMini': this.isOperaMini(),
+      'blackberry': this.isBlackberry(),
+      'linux': this.isLinux(),
+      'bsd': this.isBsd(),
+    };
+  };
+
+  /**
    * Method to remove empty Values from a Array.
    * @function removeEmptyValuesFromArray
    * @param {array} arr The Array to remove empty Values.
@@ -1151,8 +1195,8 @@
       'supports': {
         'msie': {'id': 'msie', 'version': '11'},
         'edge': {'id': 'edge', 'version': '12'},
-        'chrome': {'id': 'chrome', 'version': '64'},
-        'firefox': {'id': 'firefox', 'version': '59'},
+        'chrome': {'id': 'chrome', 'version': '66'},
+        'firefox': {'id': 'firefox', 'version': '60'},
         'safari': {'id': 'safari', 'version': '11'},
       },
     }
