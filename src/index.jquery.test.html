@@ -6,7 +6,8 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Device Detector jQuery Plugin</title>
+        <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
+        <title>Device Detector jQuery Plugin Qunit Test</title>
         <style>
           article {
             display: grid;
@@ -36,6 +37,11 @@
             section:nth-child(6n+6) {
               clear: left;
             }
+            footer {
+              clear: left;
+              float: left;
+              width: 100%;
+            }
           }
 
           @media (max-width: 480px) {
@@ -43,12 +49,23 @@
               width: 50%;
               float: left;
             }
+            footer {
+              clear: left;
+              float: left;
+              width: 100%;
+            }
           }
 
-          header {
-            grid-row: 1;
+          header,
+          footer {
             grid-column: 1/9;
             margin-bottom: 2em;
+          }
+          header {
+            grid-row: 1;
+          }
+          footer {
+            grid-row: 3;
           }
           header dt,
           header dd {
@@ -66,6 +83,14 @@
           header dl {
             margin: 0;
             padding: 1em .5em;
+          }
+          footer h3 {
+            color: gainsboro;
+          }
+          footer pre {
+            padding: .5em 2em;
+            background-color: whitesmoke;
+            border: 1px solid gainsboro;
           }
           section {
             grid-row: 2;
@@ -106,8 +131,11 @@
         <header>
           <h1>Device Detector</h1>
           <h2>jQuery Plugin</h2>
-          <p>Detect Browser, Devices and OS.</p>
+          <h3>Qunit Tests</h3>
         </header>
+
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
 
         <main>
           <article>
@@ -235,16 +263,23 @@
                 <dd id="bsd"></dd>
               </dl>
             </section>
+            <footer>
+              <pre>
+<h3>getInfo() Object</h3>
+<code id="info"></code>
+              </pre>
           </article>
         </main>
+        <script src="../node_modules/qunit/qunit/qunit.js"></script>
         <script src="../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="../dist/jquery.device.detector.js"></script>
         <script>
           $.fn.deviceDetector({'names': {'firefox': {'name': 'Custom Mozilla Firefox Name'}}})
           var d = $.fn.deviceDetector;
-          // current browser
           var userAgentString = navigator.userAgent || navigator.appVersion;
           $('#useragent').text(userAgentString);
+          // Info
+          $('#info').text(JSON.stringify(d.getInfo(), false, 4));
           // General
           $('#supported').text(d.isSupported());
           $('#mobile').text(d.isMobile());
@@ -254,7 +289,6 @@
           $('#browserName').text(d.getBrowserName());
           $('#browserId').text(d.getBrowserId());
           // OS
-          console.log(d.getOsVersionCategories());
           $('#osVersion').text(d.getOsVersion());
           $('#osVersionString').text(d.getOsVersionString());
           $('#osVersionCategories').text(JSON.stringify(d.getOsVersionCategories()));
@@ -295,5 +329,6 @@
             _this.attr('data-status', status);
           });
         </script>
+        <script src="js/jquery.device.detector.test.js"></script>
     </body>
 </html>

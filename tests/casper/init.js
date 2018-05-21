@@ -116,16 +116,12 @@ cases.forEach(function(key) {
               config.getInfo[id]
             ) :
             config.getInfo[id];
+          var expectedWithType = getWithCorrectType(
+            config.getInfo[id],
+            config.browsers[key].test[id]
+          );
           var expected = (typeof config.getInfo[id] === 'object') ?
-            JSON.stringify(
-              getWithCorrectType(
-                config.getInfo[id],
-                config.browsers[key].test[id]
-              )
-            ) : getWithCorrectType(
-              config.getInfo[id],
-              config.browsers[key].test[id]
-            );
+            JSON.stringify(expectedWithType) : expectedWithType;
           test.assertEquals(
             (subject === expected),
             true,

@@ -33,15 +33,9 @@ function getRandomSlicedArray(array, maxLength) {
   maxLength = maxLength || 12;
   var length = array.length;
   var index = Math.floor(Math.random() * length);
-  var indexStart;
-  var indexEnd;
-  if (index + maxLength - 1 >= length) {
-    indexStart = index;
-    indexEnd = length;
-  } else {
-    indexStart = index;
-    indexEnd = index + maxLength;
-  }
+  var indexStart = index;
+  var indexEnd = (index + maxLength - 1 >= length) ?
+    length : index + maxLength;
   return array.slice(indexStart, indexEnd);
 }
 

@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Device Detector jQuery Plugin</title>
+        <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
         <style>
           article {
             display: grid;
@@ -126,12 +127,15 @@
           }
         </style>
     </head>
-    <body>
+    <body class="development">
         <header>
           <h1>Device Detector</h1>
           <h2>jQuery Plugin</h2>
           <p>Detect Browser, Devices and OS.</p>
         </header>
+
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
 
         <main>
           <article>
@@ -267,6 +271,7 @@
           </article>
         </main>
         <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../node_modules/qunit/qunit/qunit.js"></script>
         <script src="js/jquery.device.detector.js"></script>
         <script>
           $.fn.deviceDetector({'names': {'firefox': {'name': 'Custom Mozilla Firefox Name'}}})
@@ -326,5 +331,6 @@
             _this.attr('data-status', status);
           });
         </script>
+        <script src="js/jquery.device.detector.test.js"></script>
     </body>
 </html>
