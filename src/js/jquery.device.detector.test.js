@@ -1,4 +1,5 @@
-var CONSOLE_LOG = false; // eslint-disable-line no-var
+var CONSOLE_LOG = false || // eslint-disable-line no-var
+  $('body').hasClass('development');
 var DEVELOPMENT = false || // eslint-disable-line no-var
   $('body').hasClass('development');
 $._TESTS_DeviceDetector = {
