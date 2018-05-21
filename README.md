@@ -8,6 +8,34 @@ jQuery Plugin to get Device and Browser Information
 ## Documentation
 [jsDoc](https://exiguus.github.io/js.device.detector/)
 
+---
+
+## TODO
+* jQuery Plugin
+  * Code Coverage Qunit with Istanbul (https://github.com/asciidisco/grunt-qunit-istanbul)
+  * Qunit test private functions (https://philipwalton.com/articles/how-to-unit-test-private-functions-in-javascript/)
+    * strip-code `/* test-code */`
+* ES6 Class / Module
+  * deviceDetector Config
+  * deviceDetector Class
+  * deviceDetector Module
+  * Jasmine Unit tests
+  * Code Coverage with Istanbul and Mocha
+
+
+```
+// grunt-clean-code
+strip_code: {
+  options: {
+    start_comment: "start: test-code",
+    end_comment: "end: test-code",
+  },
+  dist: {
+    src: "dist/*.js"
+  }
+}
+```
+
 
 [tests]: https://img.shields.io/travis/exiguus/js.device.detector/master.svg
 [tests-url]: https://travis-ci.org/exiguus/js.device.detector

@@ -20,7 +20,7 @@ var config = {
   'title': 'Test Device Detector',
   'viewport': {
     'width': 800,
-    'height': 3200,
+    'height': 3600,
   },
   'capture': {
     'enable': false,

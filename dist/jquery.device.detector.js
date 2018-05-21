@@ -497,9 +497,9 @@
    });
   }
 
-  /* test-code */
+  /* start: test-code */
   $.fn.deviceDetector.__removeEmptyValuesFromArray = removeEmptyValuesFromArray;
-  /* test-code */
+  /* end: test-code */
 
   /**
    * Method to detect Characters matching.
@@ -507,22 +507,22 @@
    * @param {array} arr The Characters to match.
    * @return {boolean} The match status.
    */
-   function isMatching(arr) {
-     var status = false; // eslint-disable-line no-var
-     var newArr = removeEmptyValuesFromArray(arr); // eslint-disable-line no-var
-     $.each( newArr, function( index, value ) {
-       value = value.toLowerCase();
-       status =
-         browserAgentString.indexOf(value) > -1 ||
-         browserVersionString.indexOf(value) > -1;
-       if (status === true) return false;
-     });
-     return status;
-   }
+  function isMatching(arr) {
+   var status = false; // eslint-disable-line no-var
+   var newArr = removeEmptyValuesFromArray(arr); // eslint-disable-line no-var
+   $.each( newArr, function( index, value ) {
+     value = ('' + value).toLowerCase();
+     status =
+       browserAgentString.indexOf(value) > -1 ||
+       browserVersionString.indexOf(value) > -1;
+     if (status === true) return false;
+   });
+   return status;
+  }
 
-   /* test-code */
+  /* start: test-code */
    $.fn.deviceDetector.__isMatching = isMatching;
-   /* test-code */
+  /* end: test-code */
 
   /**
    * Method to detect Device Type.
@@ -553,9 +553,9 @@
     }
   }
 
-  /* test-code */
+  /* start: test-code */
   $.fn.deviceDetector.__isDeviceType = isDeviceType;
-  /* test-code */
+  /* end: test-code */
 
   /**
    * Method to get the Browser Version.
@@ -579,6 +579,10 @@
     return version;
   }
 
+  /* start: test-code */
+  $.fn.deviceDetector.__getBrowserVersion = getBrowserVersion;
+  /* end: test-code */
+
   /**
    * Method to get the Browser Name.
    * @function getBrowserName
@@ -600,6 +604,10 @@
     });
     return name;
   }
+
+  /* start: test-code */
+  $.fn.deviceDetector.__getBrowserName = getBrowserName;
+  /* end: test-code */
 
   /**
    * Method to get the Operating System Version.
@@ -643,6 +651,10 @@
     return version;
   }
 
+  /* start: test-code */
+  $.fn.deviceDetector.__getOsVersion = getOsVersion;
+  /* end: test-code */
+
   /**
    * Method to get the Operating System Name.
    * @function getOsName
@@ -665,6 +677,10 @@
     return name;
   }
 
+  /* start: test-code */
+  $.fn.deviceDetector.__getOsName = getOsName;
+  /* end: test-code */
+
   /**
    * Method to detect supported Browser.
    * @function isSupported
@@ -680,13 +696,18 @@
     });
     return isSupported;
   }
+
+  /* start: test-code */
+  $.fn.deviceDetector.__isSupported = isSupported;
+  /* end: test-code */
+
   // private variables
   var browser = navigator; // eslint-disable-line no-var
   var browserAgentString = // eslint-disable-line no-var
-    browser.userAgent.toLowerCase();
+    ('' + browser.userAgent).toLowerCase();
   var browserVersionString = // eslint-disable-line no-var
-    browser.appVersion.toLowerCase();
-  browserAgentString = browserAgentString.toLowerCase();
+    ('' + browser.appVersion).toLowerCase();
+  browserAgentString = ('' + browserAgentString).toLowerCase();
   browserVersionString = browserAgentString;
 
   // config

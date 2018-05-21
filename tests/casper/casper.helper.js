@@ -22,9 +22,9 @@ function getTestCaptureName(id, timestamp) {
 function getObjectCount(obj) {
   var count = 0;
   for (var k in obj) {
-      if (obj.hasOwnProperty(k)) {
-         ++count;
-      }
+    if (obj.hasOwnProperty(k)) {
+      ++count;
+    }
   }
   return count;
 }
