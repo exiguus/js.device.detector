@@ -12,7 +12,7 @@ jQuery Plugin to get Device and Browser Information
 
 ## TODO
 * jQuery Plugin
-  * test constructor
+  * test constructor (browser matrix / custom device names)
   * Documentation
 * ES6 Class / Module
   * deviceDetector Config
