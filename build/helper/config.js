@@ -17,6 +17,10 @@ config.options = {
     dist: 'dist',
     // doc folder jsdoc3
     docs: 'docs',
+    // src folder
+    src: 'src',
+    // coverage report
+    coverage: 'coverage',
   },
   name: {
     plugin: 'device.detector',

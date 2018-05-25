@@ -12,6 +12,8 @@ module.exports = function(grunt) {
     'replace': 'grunt-text-replace',
     'usebanner': 'grunt-banner',
     'comments': 'grunt-stripcomments',
+    'strip_code': 'grunt-strip-code',
+    'qunit': 'grunt-qunit-istanbul',
   });
   // measures the time each task takes
   require('time-grunt')(grunt);
@@ -35,9 +37,14 @@ module.exports = function(grunt) {
     'clean',
     'build',
     'copy',
+    'strip_code',
     'comments',
     'usebanner',
     'jsdoc',
+  ]);
+
+  grunt.registerTask('test', [
+    'qunit',
   ]);
 
   grunt.registerTask('default', ['dist']);

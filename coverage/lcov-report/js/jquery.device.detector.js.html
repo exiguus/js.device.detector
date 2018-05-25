@@ -1,0 +1,3683 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/jquery.device.detector.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> jquery.device.detector.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.52% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>157/161</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.96% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>40/46</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>51/51</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.44% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>152/156</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099
+1100
+1101
+1102
+1103
+1104
+1105
+1106
+1107
+1108
+1109
+1110
+1111
+1112
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124
+1125
+1126
+1127
+1128
+1129
+1130
+1131
+1132
+1133
+1134
+1135
+1136
+1137
+1138
+1139
+1140
+1141
+1142
+1143
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151
+1152
+1153
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164
+1165
+1166
+1167
+1168
+1169
+1170
+1171
+1172
+1173
+1174
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188
+1189
+1190
+1191
+1192
+1193
+1194
+1195
+1196
+1197
+1198
+1199
+1200
+1201
+1202
+1203
+1204
+1205
+1206
+1207</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">845×</span>
+<span class="cline-any cline-yes">1351×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">841×</span>
+<span class="cline-any cline-yes">841×</span>
+<span class="cline-any cline-yes">841×</span>
+<span class="cline-any cline-yes">1174×</span>
+<span class="cline-any cline-yes">1174×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1174×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">841×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">419×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">120×</span>
+<span class="cline-any cline-yes">120×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-yes">205×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">205×</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">384×</span>
+<span class="cline-any cline-yes">384×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">88×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">88×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * @fileOverview device detector
+  jQuery Plugin to get Device and Browser informations
+ * @author Simon Gattner &lt;npm@0x38.de&gt;
+ * @license MIT
+ * @version 1.0.0
+ */
+&nbsp;
+/**
+ * @external "jQuery.fn"
+ * @see {@link http://docs.jquery.com/Plugins/Authoring The jQuery Plugin Guide}
+ */
+&nbsp;
+(function($) {
+  'use strict';
+  /**
+   * jQuery Methods to get Device and Browser informations
+   * @function external:"jQuery.fn".deviceDetector
+   * @external "jQuery.fn.deviceDetector"
+   */
+&nbsp;
+  $.fn.deviceDetector = function(options) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof options !== undefined) $.extend(true, config, options);
+    return true;
+  };
+&nbsp;
+  /**
+   * Method to detect mobile devices.
+   * @function external:"jQuery.fn.deviceDetector".isMobile
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isMobile = function() {
+    return isDeviceType(
+      config.vendors.apple.ios.pattern.include,
+      config.vendors.apple.ios.pattern.exclude
+    ) ||
+    isDeviceType(
+      config.vendors.google.android.pattern.include,
+      config.vendors.google.android.pattern.exclude
+    ) ||
+    isDeviceType(
+      config.vendors.microsoft.windowsPhone.pattern.include,
+      config.vendors.microsoft.windowsPhone.exclude
+    ) ||
+    isDeviceType(
+      config.vendors.blackberry.blackberry.pattern.include,
+      config.vendors.blackberry.blackberry.exclude
+    ) ||
+    isDeviceType(
+      config.mobile.pattern.include,
+      config.mobile.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect desktop devices.
+   * @function external:"jQuery.fn.deviceDetector".isDesktop
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isDesktop = function() {
+    return isDeviceType(
+      config.vendors.apple.macos.pattern.include,
+      config.vendors.apple.macos.pattern.exclude
+    ) ||
+<span class="branch-1 cbranch-no" title="branch not covered" >    isDeviceType(</span>
+      config.vendors.lbu.unixlike.pattern.include,
+      config.vendors.lbu.unixlike.pattern.exclude
+    ) ||
+<span class="branch-2 cbranch-no" title="branch not covered" >    isDeviceType(</span>
+      config.vendors.microsoft.windows.pattern.include,
+      config.vendors.microsoft.windows.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Safari.
+   * @function external:"jQuery.fn.deviceDetector".isSafari
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isSafari = function() {
+    return isDeviceType(
+      config.vendors.apple.safari.pattern.include,
+      config.vendors.apple.safari.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect iPad.
+   * @function external:"jQuery.fn.deviceDetector".isIpad
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isIpad = function() {
+    return isDeviceType(
+      config.vendors.apple.ipad.pattern.include,
+      config.vendors.apple.ipad.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect iPhone.
+   * @function external:"jQuery.fn.deviceDetector".isIphone
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isIphone = function() {
+    return isDeviceType(
+      config.vendors.apple.iphone.pattern.include,
+      config.vendors.apple.iphone.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect iOS.
+   * @function external:"jQuery.fn.deviceDetector".isIos
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isIos = function() {
+    return isDeviceType(
+      config.vendors.apple.ios.pattern.include,
+      config.vendors.apple.ios.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Mac OS.
+   * @function external:"jQuery.fn.deviceDetector".isMacos
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isMacos = function() {
+    return isDeviceType(
+      config.vendors.apple.macos.pattern.include,
+      config.vendors.apple.macos.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Chrome.
+   * @function external:"jQuery.fn.deviceDetector".isChrome
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isChrome = function() {
+    return isDeviceType(
+      config.vendors.google.chrome.pattern.include,
+      config.vendors.google.chrome.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Android.
+   * @function external:"jQuery.fn.deviceDetector".isAndroid
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isAndroid = function() {
+    return isDeviceType(
+      config.vendors.google.android.pattern.include,
+      config.vendors.google.android.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Firefox.
+   * @function external:"jQuery.fn.deviceDetector".isFirefox
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isFirefox = function() {
+    return isDeviceType(
+      config.vendors.mozilla.firefox.pattern.include,
+      config.vendors.mozilla.firefox.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Microsoft Internet Explorer (IE/Edge).
+   * @function external:"jQuery.fn.deviceDetector".isMsie
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isMsie = function() {
+    return isDeviceType(
+      config.vendors.microsoft.msie.pattern.include,
+      config.vendors.microsoft.msie.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Microsoft Edge.
+   * @function external:"jQuery.fn.deviceDetector".isEdge
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isEdge = function() {
+    return isDeviceType(
+      config.vendors.microsoft.edge.pattern.include,
+      config.vendors.microsoft.edge.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Internet Explorer.
+   * @function external:"jQuery.fn.deviceDetector".isIe
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isIe = function() {
+    return isDeviceType(
+      config.vendors.microsoft.ie.pattern.include,
+      config.vendors.microsoft.ie.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Microsoft Internet Explorer Mobile.
+   * @function external:"jQuery.fn.deviceDetector".isIeMobile
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isIeMobile = function() {
+    return isDeviceType(
+      config.vendors.microsoft.ieMobile.pattern.include,
+      config.vendors.microsoft.ieMobile.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Windows.
+   * @function external:"jQuery.fn.deviceDetector".isWindows
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isWindows = function() {
+    return isDeviceType(
+      config.vendors.microsoft.windows.pattern.include,
+      config.vendors.microsoft.windows.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Windows Phone.
+   * @function external:"jQuery.fn.deviceDetector".isWindowsPhone
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isWindowsPhone = function() {
+    return isDeviceType(
+      config.vendors.microsoft.windowsPhone.pattern.include,
+      config.vendors.microsoft.windowsPhone.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Opera.
+   * @function external:"jQuery.fn.deviceDetector".isOpera
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isOpera = function() {
+    return isDeviceType(
+      config.vendors.opera.opera.pattern.include,
+      config.vendors.opera.opera.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Opera Mini.
+   * @function external:"jQuery.fn.deviceDetector".isOperaMini
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isOperaMini = function() {
+    return isDeviceType(
+      config.vendors.opera.operaMini.pattern.include,
+      config.vendors.opera.operaMini.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect BlackBerry.
+   * @function external:"jQuery.fn.deviceDetector".isBlackberry
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isBlackberry = function() {
+    return isDeviceType(
+      config.vendors.blackberry.blackberry.pattern.include,
+      config.vendors.blackberry.blackberry.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect Linux.
+   * @function external:"jQuery.fn.deviceDetector".isLinux
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isLinux = function() {
+    return isDeviceType(
+      config.vendors.lbu.linux.pattern.include,
+      config.vendors.lbu.linux.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to detect BSD/Unix.
+   * @function external:"jQuery.fn.deviceDetector".isBsd
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isBsd = function() {
+    return isDeviceType(
+      config.vendors.lbu.bsd.pattern.include,
+      config.vendors.lbu.bsd.pattern.exclude
+    );
+  };
+&nbsp;
+  /**
+   * Method to get Browser Version.
+   * @function external:"jQuery.fn.deviceDetector".getBrowserVersion
+   * @return {string} The browser version.
+   */
+&nbsp;
+  $.fn.deviceDetector.getBrowserVersion = function() {
+    return getBrowserVersion();
+  };
+&nbsp;
+  /**
+   * Method to get Browser Name.
+   * @function external:"jQuery.fn.deviceDetector".getBrowserName
+   * @return {string} The browser name.
+   */
+&nbsp;
+  $.fn.deviceDetector.getBrowserName = function() {
+    return getBrowserName();
+  };
+&nbsp;
+  /**
+   * Method to get Browser Id (Short Name).
+   * @function external:"jQuery.fn.deviceDetector".getBrowserId
+   * @return {string} The browser id.
+   */
+&nbsp;
+  $.fn.deviceDetector.getBrowserId = function() {
+    return getBrowserName(true);
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Version.
+   * @function external:"jQuery.fn.deviceDetector".getOsVersion
+   * @return {string} The OS version String.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsVersion = function() {
+    return getOsVersion().string;
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Version String.
+   * @function external:"jQuery.fn.deviceDetector".getOsVersionString
+   * @return {string} The OS version String.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsVersionString = function() {
+    return getOsVersion().string;
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Version Categories.
+   * @function external:"jQuery.fn.deviceDetector".getOsVersionCategories
+   * @return {object} The OS version Categories.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsVersionCategories = function() {
+    return getOsVersion().categories;
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Version Major.
+   * @function external:"jQuery.fn.deviceDetector".getOsVersionMajor
+   * @return {number} The OS version Major.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsVersionMajor = function() {
+    return getOsVersion().categories.major;
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Version Minor.
+   * @function external:"jQuery.fn.deviceDetector".getOsVersionMinor
+   * @return {number} The OS version Minor.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsVersionMinor = function() {
+    return getOsVersion().categories.minor;
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Version Bugfix.
+   * @function external:"jQuery.fn.deviceDetector".getOsVersionBugfix
+   * @return {number} The OS version Bugfix.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsVersionBugfix = function() {
+    return getOsVersion().categories.bugfix;
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Name.
+   * @function external:"jQuery.fn.deviceDetector".getOsName
+   * @return {string} The OS name.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsName = function() {
+    return getOsName();
+  };
+&nbsp;
+  /**
+   * Method to get Operating System Id (Short Name).
+   * @function external:"jQuery.fn.deviceDetector".getOsId
+   * @return {string} The OS id.
+   */
+&nbsp;
+  $.fn.deviceDetector.getOsId = function() {
+    return getOsName(true);
+  };
+&nbsp;
+  /**
+   * Method to detect Browser and Device support.
+   * @function external:"jQuery.fn.deviceDetector".isSupported
+   * @return {boolean} The match status.
+   */
+&nbsp;
+  $.fn.deviceDetector.isSupported = function() {
+    return isSupported();
+  };
+&nbsp;
+  /**
+   * Method to get all available device and browser informations.
+   * @function external:"jQuery.fn.deviceDetector".getInfo
+   * @return {object} The device and browser infromation.
+   */
+&nbsp;
+  $.fn.deviceDetector.getInfo = function() {
+    return {
+      'browserVersion': this.getBrowserVersion(),
+      'browserName': this.getBrowserName(),
+      'browserId': this.getBrowserId(),
+      'osVersion': this.getOsVersion(),
+      'osVersionString': this.getOsVersionString(),
+      'osVersionCategories': this.getOsVersionCategories(),
+      'osVersionMajor': this.getOsVersionMajor(),
+      'osVersionMinor': this.getOsVersionMinor(),
+      'osVersionBugfix': this.getOsVersionBugfix(),
+      'osName': this.getOsName(),
+      'osId': this.getOsId(),
+      'supported': isSupported(),
+      'mobile': this.isMobile(),
+      'desktop': this.isDesktop(),
+      'safari': this.isSafari(),
+      'iphone': this.isIphone(),
+      'ipad': this.isIpad(),
+      'ios': this.isIos(),
+      'macos': this.isMacos(),
+      'chrome': this.isChrome(),
+      'android': this.isAndroid(),
+      'firefox': this.isFirefox(),
+      'ie': this.isIe(),
+      'msie': this.isMsie(),
+      'edge': this.isEdge(),
+      'ieMobile': this.isIeMobile(),
+      'windowsPhone': this.isWindowsPhone(),
+      'windows': this.isWindows(),
+      'opera': this.isOpera(),
+      'operaMini': this.isOperaMini(),
+      'blackberry': this.isBlackberry(),
+      'linux': this.isLinux(),
+      'bsd': this.isBsd(),
+    };
+  };
+&nbsp;
+  /**
+   * Method to remove empty Values from a Array.
+   * @function removeEmptyValuesFromArray
+   * @param {array} arr The Array to remove empty Values.
+   * @return {array} The new Array without empty Values.
+   */
+  function removeEmptyValuesFromArray(arr) {
+    return $.map( arr, function(value) {
+       return value === '' ? null : value;
+   });
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__removeEmptyValuesFromArray = removeEmptyValuesFromArray;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to detect Characters matching.
+   * @function isMatching
+   * @param {array} arr The Characters to match.
+   * @return {boolean} The match status.
+   */
+  function isMatching(arr) {
+   var status = false; // eslint-disable-line no-var
+   var newArr = removeEmptyValuesFromArray(arr); // eslint-disable-line no-var
+   $.each( newArr, function( index, value ) {
+     value = ('' + value).toLowerCase();
+     status =
+       browserAgentString.indexOf(value) &gt; -1 ||
+       browserVersionString.indexOf(value) &gt; -1;
+     if (status === true) return false;
+   });
+   return status;
+  }
+&nbsp;
+  /* start: test-code */
+   $.fn.deviceDetector.__isMatching = isMatching;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to detect Device Type.
+   * @function isDeviceType
+   * @param {array|string} includes The Device to match.
+   * @param {array|string} excludes The Device should not match.
+   * @return {boolean} The Device Type match status.
+   */
+  function isDeviceType(includes, excludes) {
+    try {
+      var hasIncludes = false; // eslint-disable-line no-var
+      var hasExcludes = false; // eslint-disable-line no-var
+&nbsp;
+      if (!$.isArray(includes)) includes = $.makeArray(includes);
+&nbsp;
+      if (!$.isArray(excludes)) excludes = $.makeArray(excludes);
+&nbsp;
+      hasExcludes = isMatching(excludes);
+&nbsp;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (hasExcludes === false) hasIncludes = isMatching(includes);
+&nbsp;
+      return hasIncludes;
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >      console.info( // eslint-disable-line no-console</span>
+        'deviceDetector: No match String || Array given in isDeviceType()',
+        error
+      );
+    }
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__isDeviceType = isDeviceType;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to get the Browser Version.
+   * @function getBrowserVersion
+   * @return {number} The browser Version. Default is 0.
+   */
+  function getBrowserVersion() {
+    var version = 0; // eslint-disable-line no-var
+    var data = // eslint-disable-line no-var
+      browserAgentString +
+      browserVersionString;
+    $.each(config.browsers.versions, function(key, value) {
+      var index = data.indexOf(value.index); // eslint-disable-line no-var
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (index &gt; -1) {
+<span class="cstat-no" title="statement not covered" >        version = parseFloat(</span>
+          data.substring(index + value.map).split('.')[0]
+        );
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+      }
+    });
+    return version;
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__getBrowserVersion = getBrowserVersion;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to get the Browser Name.
+   * @function getBrowserName
+   * @param {boolean} returnId The Method should return an Id
+   * (browser short name) instead of the Name (browser long name)
+   * @return {string} The browser Name. Default ist unknown.
+   */
+  function getBrowserName(returnId) {
+    var name = 'unknown'; // eslint-disable-line no-var
+    $.each(config.browsers.names, function(key, value) {
+      var isBrowser = isDeviceType( // eslint-disable-line no-var
+        value.pattern.include,
+        value.pattern.exclude
+      );
+      if (isBrowser) {
+        (returnId === true) ? name = value.id : name = value.name;
+        return false;
+      }
+    });
+    return name;
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__getBrowserName = getBrowserName;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to get the Operating System Version.
+   * @function getOsVersion
+   * @return {object} The OS Version . Default is 0.
+   * {
+   *  'string': '0',
+   *  'categories': {
+   *    'major': 0,
+   *    'minor': 0,
+   *    'bugfix': 0,
+   *  }
+   * }
+   */
+  function getOsVersion() {
+    var version = { // eslint-disable-line no-var
+      'string': '0.0.0',
+      'categories': {
+        'major': 0,
+        'minor': 0,
+        'bugfix': 0,
+      },
+    };
+    var data = // eslint-disable-line no-var
+      browserAgentString +
+      browserVersionString;
+    $.each(config.oss.versions, function(key, value) {
+      var index = data.indexOf(value.index); // eslint-disable-line no-var
+      if (index &gt; -1) {
+        version.string =
+          data.substring(index + value.map).split(value.cut)[0]
+          || '0.0.0';
+        var choped = // eslint-disable-line no-var
+          version.string.split(value.chop);
+        version.categories.major = parseInt(choped[0]) || 0;
+        version.categories.minor = parseInt(choped[1]) || 0;
+        version.categories.bugfix = parseInt(choped[2]) || 0;
+        return false;
+      }
+    });
+    return version;
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__getOsVersion = getOsVersion;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to get the Operating System Name.
+   * @function getOsName
+   * @param {boolean} returnId The Method should return an Id
+   * (OS short name) instead of the Name (OS long name)
+   * @return {string} The OS Name. Default ist unknown.
+   */
+  function getOsName(returnId) {
+    var name = 'unknown'; // eslint-disable-line no-var
+    $.each(config.oss.names, function(key, value) {
+      var isOs = isDeviceType( // eslint-disable-line no-var
+        value.pattern.include,
+        value.pattern.exclude
+      );
+      if (isOs) {
+        (returnId === true) ? name = value.id : name = value.name;
+        return false;
+      }
+    });
+    return name;
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__getOsName = getOsName;
+  /* end: test-code */
+&nbsp;
+  /**
+   * Method to detect supported Browser.
+   * @function isSupported
+   * @return {boolean} The supported Browser match status.
+   */
+  function isSupported() {
+    var isSupported = false; // eslint-disable-line no-var
+    $.each(config.supports, function(key, value) {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (
+        getBrowserName(true) === value.id &amp;&amp;
+        getBrowserVersion() &gt;= parseFloat(value.version)
+      ) <span class="cstat-no" title="statement not covered" >isSupported = true;</span>
+    });
+    return isSupported;
+  }
+&nbsp;
+  /* start: test-code */
+  $.fn.deviceDetector.__isSupported = isSupported;
+  /* end: test-code */
+&nbsp;
+  // private variables
+  var browser = navigator; // eslint-disable-line no-var
+  var browserAgentString = // eslint-disable-line no-var
+    ('' + browser.userAgent).toLowerCase();
+  var browserVersionString = // eslint-disable-line no-var
+    ('' + browser.appVersion).toLowerCase();
+  browserAgentString = ('' + browserAgentString).toLowerCase();
+  browserVersionString = browserAgentString;
+&nbsp;
+  // config
+  //
+  //  vendor
+  //    Apple
+  //    Google
+  //    Mozilla
+  //    Microsoft
+  //    Opera
+  //    Blackberry
+  //    lbu (linux, bsd and unix)
+  //  browsers
+  //    names: browser nameings and patterns
+  //    versions: index / matching patterns
+  //  oss
+  //    names: os nameings and patterns
+  //    versions: index / matching patterns
+  //  mobile
+  //    mobile matching patterns
+  //  supports
+  //    supported browser / browser matrix
+  var config = {}; // eslint-disable-line no-var
+  $.extend(
+    config,
+    {
+      'vendors': {
+        'apple': {
+          'safari': {
+            'pattern': {
+              'include': 'safari',
+              'exclude': ['chrome', 'iemobile', 'opr/', 'opera'],
+            },
+          },
+          'iphone': {
+            'pattern': {
+              'include': 'iphone',
+              'exclude': 'iemobile',
+            },
+          },
+          'ipad': {
+            'pattern': {
+              'include': 'ipad',
+              'exclude': 'iemobile',
+            },
+          },
+          'ios': {
+            'pattern': {
+              'include': ['ipad', 'iphone', 'ipod'],
+              'exclude': 'iemobile',
+            },
+          },
+          'macos': {
+            'pattern': {
+              'include': 'mac os',
+              'exclude': ['iphone', 'ipad', 'ipod'],
+            },
+          },
+        },
+        'google': {
+          'chrome': {
+            'pattern': {
+              'include': 'chrome',
+              'exclude': ['edge', 'msie', 'firefox', 'opr/', 'opera'],
+            },
+          },
+          'android': {
+            'pattern': {
+              'include': 'android',
+              'exclude': 'windows phone',
+            },
+          },
+        },
+        'mozilla': {
+          'firefox': {
+            'pattern': {
+              'include': 'firefox',
+              'exclude': '',
+            },
+          },
+        },
+        'microsoft': {
+          'msie': {
+            'pattern': {
+              'include': ['trident', 'msie'],
+              'exclude': 'iemobile',
+            },
+          },
+          'edge': {
+            'pattern': {
+              'include': 'edge',
+              'exclude': 'iemobile',
+            },
+          },
+          'ie': {
+            'pattern': {
+              'include': [
+                'trident',
+                'msie',
+                'edge',
+              ],
+              'exclude': 'iemobile',
+            },
+          },
+          'ieMobile': {
+            'pattern': {
+              'include': 'iemobile',
+              'exclude': '',
+            },
+          },
+          'windows': {
+            'pattern': {
+              'include': 'windows nt',
+              'exclude': '',
+            },
+          },
+          'windowsMobile': {
+            'pattern': {
+              'include': 'windows phone',
+              'exclude': '',
+            },
+          },
+          'windowsXp': {
+            'pattern': {
+              'include': 'windows nt 5',
+              'exclude': '',
+            },
+          },
+          'windowsVista': {
+            'pattern': {
+              'include': 'windows nt 6.0',
+              'exclude': '',
+            },
+          },
+          'windows7': {
+            'pattern': {
+              'include': 'windows nt 6.1',
+              'exclude': '',
+            },
+          },
+          'windows8': {
+            'pattern': {
+              'include': 'windows nt 6.2',
+              'exclude': '',
+            },
+          },
+          'windows81': {
+            'pattern': {
+              'include': 'windows nt 6.3',
+              'exclude': '',
+            },
+          },
+          'windows10': {
+            'pattern': {
+              'include': 'windows nt 10.0',
+              'exclude': '',
+            },
+          },
+          'windowsPhone': {
+            'pattern': {
+              'include': 'windows phone',
+              'exclude': '',
+            },
+          },
+        },
+        'opera': {
+          'opera': {
+            'pattern': {
+              'include': ['opera', 'opr', 'presto'],
+              'exclude': 'opera mini',
+            },
+          },
+          'operaMini': {
+            'pattern': {
+              'include': 'opera mini',
+              'exclude': '',
+            },
+          },
+        },
+        'blackberry': {
+          'blackberry': {
+            'pattern': {
+              'include': 'blackberry',
+              'exclude': '',
+            },
+          },
+        },
+        'lbu': {
+          'linux': {
+            'pattern': {
+              'include': 'linux',
+              'exclude': '',
+            },
+          },
+          'bsd': {
+            'pattern': {
+              'include': ['bsd', 'unix', 'sunos'],
+              'exclude': '',
+            },
+          },
+          'unixlike': {
+            'pattern': {
+              'include': ['linux', 'bsd', 'unix', 'sunos', 'X11'],
+              'exclude': ['mobile', 'tablet', 'phone', 'droid'],
+            },
+          },
+        },
+      },
+    }
+  );
+  $.extend(
+    config,
+    {
+      'browsers': {
+        'names': {
+          'edge': {
+            'id': 'edge',
+            'name': 'Microsoft Edge',
+            'pattern': config.vendors.microsoft.edge.pattern,
+          },
+          'ie': {
+            'id': 'msie',
+            'name': 'Microsoft Internet Explorer',
+            'pattern': config.vendors.microsoft.ie.pattern,
+          },
+          'ieMobile': {
+            'id': 'ieMobile',
+            'name': 'Microsoft Internet Explorer Mobile',
+            'pattern': config.vendors.microsoft.ieMobile.pattern,
+          },
+          'chrome': {
+            'id': 'chrome',
+            'name': 'Google Chrome',
+            'pattern': config.vendors.google.chrome.pattern,
+          },
+          'safari': {
+            'id': 'safari',
+            'name': 'Apple Safari',
+            'pattern': config.vendors.apple.safari.pattern,
+          },
+          'firefox': {
+            'id': 'firefox',
+            'name': 'Mozilla Firefox',
+            'pattern': config.vendors.mozilla.firefox.pattern,
+          },
+          'opera': {
+            'id': 'opera',
+            'name': 'Opera',
+            'pattern': config.vendors.opera.opera.pattern,
+          },
+          'operaMini': {
+            'id': 'operaMini',
+            'name': 'Opera Mini',
+            'pattern': config.vendors.opera.operaMini.pattern,
+          },
+          'blackberry': {
+            'id': 'blackberry',
+            'name': 'BlackBerry',
+            'pattern': config.vendors.blackberry.blackberry.pattern,
+          },
+        },
+        'versions': {
+          'default': {
+            'index': 'rv:',
+            'map': 3,
+          },
+          'edge': {
+            'index': 'edge/',
+            'map': 5,
+          },
+          'msie': {
+            'index': 'msie ',
+            'map': 5,
+          },
+          'ieMobile': {
+            'index': 'iemobile/',
+            'map': 9,
+          },
+          'chrome': {
+            'index': 'chrome/',
+            'map': 7,
+          },
+          'firefox': {
+            'index': 'firefox/',
+            'map': 8,
+          },
+          'opr': {
+            'index': 'opr/',
+            'map': 4,
+          },
+          'operaMini': {
+            'index': 'opera/',
+            'map': 6,
+          },
+          'opera': {
+            'index': 'opera ',
+            'map': 5,
+          },
+          'safari': {
+            'index': 'version/',
+            'map': 8,
+          },
+        },
+      },
+    }
+  );
+  $.extend(
+    config,
+    {
+      'oss': {
+        'names': {
+          'windowsPhone': {
+            'id': 'windowsPhone',
+            'name': 'Microsoft Windows Phone',
+            'pattern': config.vendors.microsoft.windowsPhone.pattern,
+          },
+          'windowsXp': {
+            'id': 'windowsXp',
+            'name': 'Microsoft Windows XP',
+            'pattern': config.vendors.microsoft.windowsXp.pattern,
+          },
+          'windowsVista': {
+            'id': 'windowsVista',
+            'name': 'Microsoft Windows Vista',
+            'pattern': config.vendors.microsoft.windowsVista.pattern,
+          },
+          'windows7': {
+            'id': 'windows7',
+            'name': 'Microsoft Windows 7',
+            'pattern': config.vendors.microsoft.windows7.pattern,
+          },
+          'window8': {
+            'id': 'windows8',
+            'name': 'Microsoft Windows 8',
+            'pattern': config.vendors.microsoft.windows8.pattern,
+          },
+          'window81': {
+            'id': 'windows81',
+            'name': 'Microsoft Windows 8.1',
+            'pattern': config.vendors.microsoft.windows81.pattern,
+          },
+          'windows10': {
+            'id': 'windows10',
+            'name': 'Microsoft Windows 10',
+            'pattern': config.vendors.microsoft.windows10.pattern,
+          },
+          'macos': {
+            'id': 'macos',
+            'name': 'Apple Mac OS X',
+            'pattern': config.vendors.apple.macos.pattern,
+          },
+          'ios': {
+            'id': 'ios',
+            'name': 'Apple iOS',
+            'pattern': config.vendors.apple.ios.pattern,
+          },
+          'android': {
+            'id': 'android',
+            'name': 'Android Linux',
+            'pattern': config.vendors.google.android.pattern,
+          },
+          'linux': {
+            'id': 'linux',
+            'name': 'GNU/Linux OS',
+            'pattern': config.vendors.lbu.linux.pattern,
+          },
+          'bsd': {
+            'id': 'bsd',
+            'name': 'BSD OS',
+            'pattern': config.vendors.lbu.bsd.pattern,
+          },
+          'blackberry': {
+            'id': 'blackberry',
+            'name': 'BlackBerry OS',
+            'pattern': config.vendors.blackberry.blackberry.pattern,
+          },
+        },
+        'versions': {
+          'windowsPhone': {
+            'index': config.vendors.microsoft.windowsPhone.pattern.include,
+            'map': 14,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'windowsXp': {
+            'index': config.vendors.microsoft.windowsXp.pattern.include,
+            'map': 11,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'windowsVista': {
+            'index': config.vendors.microsoft.windowsVista.pattern.include,
+            'map': 11,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'windows7': {
+            'index': config.vendors.microsoft.windows7.pattern.include,
+            'map': 11,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'windows8': {
+            'index': config.vendors.microsoft.windows8.pattern.include,
+            'map': 11,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'windows81': {
+            'index': config.vendors.microsoft.windows81.pattern.include,
+            'map': 11,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'windows10': {
+            'index': config.vendors.microsoft.windows10.pattern.include,
+            'map': 11,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'android': {
+            'index': config.vendors.google.android.pattern.include,
+            'map': 8,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+          'ios': {
+            'index': 'cpu os ',
+            'map': 7,
+            'cut': / |\)/,
+            'chop': '_',
+          },
+          'iphone': {
+            'index': 'iphone os ',
+            'map': 10,
+            'cut': / |\)/,
+            'chop': '_',
+          },
+          'ipad': {
+            'index': 'ipad os ',
+            'map': 8,
+            'cut': / |\)/,
+            'chop': '_',
+          },
+          'macos': {
+            'index': 'mac os x',
+            'map': 9,
+            'cut': / |\)|;/,
+            'chop': /_|\./,
+          },
+          'bsd': {
+            'index': config.vendors.lbu.bsd.pattern.include,
+            'map': 5,
+            'cut': / |\)/,
+            'chop': '.',
+          },
+          'linux': {
+            'index': config.vendors.lbu.linux.pattern.include,
+            'map': 5,
+            'cut': /;| |\)/,
+            'chop': '.',
+          },
+          'blackberry': {
+            'index': config.vendors.blackberry.blackberry.pattern.include,
+            'map': 10,
+            'cut': /;|\)/,
+            'chop': '.',
+          },
+        },
+      },
+    }
+  );
+  $.extend(
+    config,
+    {
+      'mobile': {
+        'pattern': {
+          'include': ['mobile', 'tablet', 'phone', 'droid'],
+          'exclude': '',
+        },
+      },
+    }
+  );
+  $.extend(
+    config,
+    {
+      'supports': {
+        'msie': {'id': 'msie', 'version': '11'},
+        'edge': {'id': 'edge', 'version': '12'},
+        'chrome': {'id': 'chrome', 'version': '66'},
+        'firefox': {'id': 'firefox', 'version': '60'},
+        'safari': {'id': 'safari', 'version': '11'},
+      },
+    }
+  );
+}(jQuery));
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 26 2018 00:43:54 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

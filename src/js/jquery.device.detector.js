@@ -808,7 +808,6 @@
                 'trident',
                 'msie',
                 'edge',
-                'iemobile',
               ],
               'exclude': 'iemobile',
             },
