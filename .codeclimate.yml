@@ -13,3 +13,7 @@ exclude_patterns:
 - "LICENSE"
 - "package*"
 - "webpack.*"
+eslint:
+  enabled: true
+  config:
+    config: .eslintrc
