@@ -18,7 +18,7 @@ module.exports = function(config) {
       'src/js/jquery.device.detector.js': ['coverage'],
     },
     coverageReporter: {
-      dir: 'coverage/jquery',
+      dir: 'coverage',
       reporters: [
         {type: 'html', subdir: 'report-html'},
         {type: 'lcov', subdir: 'report-lcov'},
