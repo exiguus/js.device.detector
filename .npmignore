@@ -17,5 +17,6 @@ Gruntfile.js
 jsdoc.json
 karma.*.js
 pom.xml
+TODO.md
 webpack.*
 package-lock.json
