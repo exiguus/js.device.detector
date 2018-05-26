@@ -13,7 +13,7 @@ coverage/
 .npmignore
 Gruntfile.js
 jsdoc.json
-karma.conf.js
+karma.*.js
 pom.xml
 webpack.*
 package-lock.json

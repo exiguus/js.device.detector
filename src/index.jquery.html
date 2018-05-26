@@ -274,67 +274,10 @@
               </pre>
           </article>
         </main>
-        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="../node_modules/qunit/qunit/qunit.js"></script>
+        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="js/jquery.device.detector.js"></script>
-        <script>
-          $.fn.deviceDetector({'names': {'firefox': {'name': 'Custom Mozilla Firefox Name'}}})
-          var d = $.fn.deviceDetector;
-          var userAgentString = navigator.userAgent || navigator.appVersion;
-          $('#useragent').text(userAgentString);
-          // Info
-          $('#info').text(JSON.stringify(d.getInfo(), false, 4));
-          console.log(d.getInfo());
-          // General
-          $('#supported').text(d.isSupported());
-          $('#mobile').text(d.isMobile());
-          $('#desktop').text(d.isDesktop());
-          // Browser
-          $('#browserVersion').text(d.getBrowserVersion());
-          $('#browserName').text(d.getBrowserName());
-          $('#browserId').text(d.getBrowserId());
-          // OS
-          console.log(d.getOsVersionCategories());
-          $('#osVersion').text(d.getOsVersion());
-          $('#osVersionString').text(d.getOsVersionString());
-          $('#osVersionCategories').text(JSON.stringify(d.getOsVersionCategories()));
-          $('#osVersionMajor').text(d.getOsVersionMajor());
-          $('#osVersionMinor').text(d.getOsVersionMinor());
-          $('#osVersionBugfix').text(d.getOsVersionBugfix());
-          $('#osName').text(d.getOsName());
-          $('#osId').text(d.getOsId());
-          // Apple
-          $('#safari').text(d.isSafari());
-          $('#iphone').text(d.isIphone());
-          $('#ipad').text(d.isIpad());
-          $('#ios').text(d.isIos());
-          $('#macos').text(d.isMacos());
-          // Google
-          $('#chrome').text(d.isChrome());
-          $('#android').text(d.isAndroid());
-          // Mozilla
-          $('#firefox').text(d.isFirefox());
-          // Microsoft
-          $('#ie').text(d.isIe());
-          $('#msie').text(d.isMsie());
-          $('#edge').text(d.isEdge());
-          $('#ieMobile').text(d.isIeMobile());
-          $('#windowsPhone').text(d.isWindowsPhone());
-          $('#windows').text(d.isWindows());
-          // Opera
-          $('#opera').text(d.isOpera());
-          $('#operaMini').text(d.isOperaMini());
-          // BlackBerry
-          $('#blackberry').text(d.isBlackberry);
-          // other
-          $('#linux').text(d.isLinux());
-          $('#bsd').text(d.isBsd());
-          $('dl dd').each(function () {
-            var _this = $(this);
-            var status = _this.text();
-            _this.attr('data-status', status);
-          });
-        </script>
+        <script src="jquery.index.js"></script>
         <script src="js/jquery.device.detector.test.js"></script>
     </body>
 </html>
