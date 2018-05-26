@@ -10,10 +10,6 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - npm config set spin false
-  - npm install -g npm@^6
-install:
-  - npm ci
 script:
   - npm test
 after_script:
