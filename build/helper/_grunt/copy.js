@@ -11,7 +11,15 @@ module.exports = {
   },
   coverage: {
     cwd: '<%= paths.coverage %>/report-html/',
-    dest: '<%= paths.docs %>/coverage/',
+    dest: '<%= paths.docs %>/<%= paths.coverage %>/',
+    expand: true,
+    src: [
+      '**',
+    ],
+  },
+  static: {
+    cwd: '<%= paths.static %>/',
+    dest: '<%= paths.docs %>/<%= paths.static %>/',
     expand: true,
     src: [
       '**',

@@ -40,6 +40,7 @@ module.exports = function(grunt) {
     'comments',
     'usebanner',
     'jsdoc',
+    'copy:static',
   ]);
 
   grunt.registerTask('default', ['dist']);

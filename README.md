@@ -108,7 +108,7 @@ npm install --save js.device.detector
 ## Documentation
 
 * [Available  Methods](https://exiguus.github.io/js.device.detector/external-_jQuery.fn.deviceDetector_.html)
-* [Coverage](file:///Users/simongattner/Documents/projects/js.device.detector/docs/coverage/js/index.html)
+* [Coverage](https://exiguus.github.io/js.device.detector/coverage/js/index.html)
 * [Docs](https://exiguus.github.io/js.device.detector/)
 
 ```

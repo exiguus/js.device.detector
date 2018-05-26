@@ -21,6 +21,8 @@ config.options = {
     src: 'src',
     // coverage report
     coverage: 'coverage',
+    // static files
+    static: 'static',
   },
   name: {
     plugin: 'device.detector',
