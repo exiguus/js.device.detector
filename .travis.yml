@@ -13,4 +13,5 @@ before_script:
 script:
   - npm test
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter sum-coverage coverage/*/report-Icovonly.json
+  - ./cc-test-reporter upload-coverage  --exit-code $TRAVIS_TEST_RESULT
