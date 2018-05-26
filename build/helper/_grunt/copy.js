@@ -9,4 +9,12 @@ module.exports = {
       '<%= name.plugin %>.class.js',
     ],
   },
+  coverage: {
+    cwd: '<%= paths.coverage %>/report-html/',
+    dest: '<%= paths.docs %>/coverage/',
+    expand: true,
+    src: [
+      '**',
+    ],
+  },
 };

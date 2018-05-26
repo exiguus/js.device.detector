@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="156"  lines-covered="152"  line-rate="0.9743999999999999"  branches-valid="46"  branches-covered="40"  branch-rate="0.8695999999999999"  timestamp="1527325478248" complexity="0" version="0.1">
+<coverage lines-valid="156"  lines-covered="152"  line-rate="0.9743999999999999"  branches-valid="46"  branches-covered="40"  branch-rate="0.8695999999999999"  timestamp="1527331849343" complexity="0" version="0.1">
 <sources>
 	<source>/Users/simongattner/Documents/projects/js.device.detector</source>
 </sources>

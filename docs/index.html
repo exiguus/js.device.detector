@@ -46,24 +46,191 @@
         <article><p><a href="https://travis-ci.org/exiguus/js.device.detector"><img src="https://img.shields.io/travis/exiguus/js.device.detector/master.svg" alt="tests"></a>
 <a href="https://codeclimate.com/github/exiguus/js.device.detector/test_coverage"><img src="https://api.codeclimate.com/v1/badges/6eaaa84b942cab654bf7/test_coverage" alt="coverage"></a>
 <a href="https://codeclimate.com/github/exiguus/js.device.detector/maintainability"><img src="https://api.codeclimate.com/v1/badges/6eaaa84b942cab654bf7/maintainability" alt="maintainability"></a></p>
-<h1>js.device.detector</h1><p>jQuery Plugin to get Device and Browser Information</p>
-<h2>Documentation</h2><p><a href="https://exiguus.github.io/js.device.detector/">jsDoc</a></p>
-<hr>
-<h2>TODO</h2><ul>
-<li>jQuery Plugin<ul>
-<li>test constructor (browser matrix / custom device names)</li>
-<li>Documentation</li>
+<h1>js.device.detector</h1><p>jQuery Plugin to get Device and Browser Information like OS Name, Version or Browser Name, Version.</p>
+<p>The plugin can also discover mobile and desktop devices and a general browser support against a (pre) configured browser matrix.</p>
+<h2>npm</h2><p><a href="https://npmjs.com/package/js.device.detector"><img src="https://img.shields.io/npm/v/js.device.detector.svg" alt="npm"></a></p>
+<pre class="prettyprint source"><code>npm install --save js.device.detector</code></pre><h2>Example</h2><h3>Usage</h3><pre class="prettyprint source lang-html"><code>&lt;script src=&quot;../node_modules/jquery/dist/jquery.min.js&quot;>&lt;/script>
+&lt;script src=&quot;../node_modules/dist/jquery.device.detector.min.js&quot;>&lt;/script>
+&lt;script>
+  // init
+  var d = $.fn.deviceDetector;
+  if (d.isDesktop()) {
+    alert(
+      'You are using ' +
+      d.getBrowserName() +
+      ' as Desktop Browser on ' +
+      d.getOsName() +
+      '.'
+    );
+  }
+  console.log(d.getInfo());
+  // return
+  // {
+  //     &quot;browserVersion&quot;: 66,
+  //     &quot;browserName&quot;: &quot;Google Chrome&quot;,
+  //     &quot;browserId&quot;: &quot;chrome&quot;,
+  //     &quot;osVersion&quot;: &quot;10_13_4&quot;,
+  //     &quot;osVersionString&quot;: &quot;10_13_4&quot;,
+  //     &quot;osVersionCategories&quot;: {
+  //         &quot;major&quot;: 10,
+  //         &quot;minor&quot;: 13,
+  //         &quot;bugfix&quot;: 4
+  //     },
+  //     &quot;osVersionMajor&quot;: 10,
+  //     &quot;osVersionMinor&quot;: 13,
+  //     &quot;osVersionBugfix&quot;: 4,
+  //     &quot;osName&quot;: &quot;Apple Mac OS X&quot;,
+  //     &quot;osId&quot;: &quot;macos&quot;,
+  //     &quot;supported&quot;: true,
+  //     &quot;mobile&quot;: false,
+  //     &quot;desktop&quot;: true,
+  //     &quot;safari&quot;: false,
+  //     &quot;iphone&quot;: false,
+  //     &quot;ipad&quot;: false,
+  //     &quot;ios&quot;: false,
+  //     &quot;macos&quot;: true,
+  //     &quot;chrome&quot;: true,
+  //     &quot;android&quot;: false,
+  //     &quot;firefox&quot;: false,
+  //     &quot;ie&quot;: false,
+  //     &quot;msie&quot;: false,
+  //     &quot;edge&quot;: false,
+  //     &quot;ieMobile&quot;: false,
+  //     &quot;windowsPhone&quot;: false,
+  //     &quot;windows&quot;: false,
+  //     &quot;opera&quot;: false,
+  //     &quot;operaMini&quot;: false,
+  //     &quot;blackberry&quot;: false,
+  //     &quot;linux&quot;: false,
+  //     &quot;bsd&quot;: false
+  // }
+&lt;/script></code></pre><h3>Browser Matrix</h3><pre class="prettyprint source lang-js"><code>// default browser matrix
+{
+  'supports': {
+    'msie': {'id': 'msie', 'version': '11'},
+    'edge': {'id': 'edge', 'version': '12'},
+    'chrome': {'id': 'chrome', 'version': '66'},
+    'firefox': {'id': 'firefox', 'version': '60'},
+    'safari': {'id': 'safari', 'version': '11'},
+  },
+}</code></pre><pre class="prettyprint source lang-html"><code>&lt;script>
+  // custom browser matrix
+  $.fn.deviceDetector(
+    {
+      'supports': {
+        'edge': {'id': 'edge', 'version': '12'},
+        'chrome': {'id': 'chrome', 'version': '72'},
+        'firefox': {'id': 'firefox', 'version': '68'},
+      },
+    }
+  );
+&lt;/script></code></pre><h2>Documentation</h2><ul>
+<li><a href="https://exiguus.github.io/js.device.detector/external-_jQuery.fn.deviceDetector_.html">Available  Methods</a></li>
+<li><a href="file:///Users/simongattner/Documents/projects/js.device.detector/docs/coverage/js/index.html">Coverage</a></li>
+<li><a href="https://exiguus.github.io/js.device.detector/">Docs</a></li>
 </ul>
-</li>
-<li>ES6 Class / Module<ul>
-<li>deviceDetector Config</li>
-<li>deviceDetector Class</li>
-<li>deviceDetector Module</li>
-<li>Jasmine Unit tests</li>
-<li>Code Coverage with Istanbul and Mocha</li>
-</ul>
-</li>
-</ul></article>
+<pre class="prettyprint source"><code>'functions': {
+  'public': {
+    'getBrowserId': {
+      'return': 'string',
+    },
+    'getBrowserName': {
+      'return': 'string',
+    },
+    'getBrowserVersion': {
+      'return': 'number',
+    },
+    'getInfo': {
+      'return': 'object',
+    },
+    'getOsId': {
+      'return': 'string',
+    },
+    'getOsName': {
+      'return': 'string',
+    },
+    'getOsVersion': {
+      'return': 'string',
+    },
+    'getOsVersionBugfix': {
+      'return': 'number',
+    },
+    'getOsVersionCategories': {
+      'return': 'object',
+    },
+    'getOsVersionMinor': {
+      'return': 'number',
+    },
+    'getOsVersionMajor': {
+      'return': 'number',
+    },
+    'getOsVersionString': {
+      'return': 'string',
+    },
+    'isBlackberry': {
+      'return': 'boolean',
+    },
+    'isBsd': {
+      'return': 'boolean',
+    },
+    'isChrome': {
+      'return': 'boolean',
+    },
+    'isDesktop': {
+      'return': 'boolean',
+    },
+    'isEdge': {
+      'return': 'boolean',
+    },
+    'isFirefox': {
+      'return': 'boolean',
+    },
+    'isIe': {
+      'return': 'boolean',
+    },
+    'isIeMobile': {
+      'return': 'boolean',
+    },
+    'isIpad': {
+      'return': 'boolean',
+    },
+    'isIphone': {
+      'return': 'boolean',
+    },
+    'isLinux': {
+      'return': 'boolean',
+    },
+    'isMacos': {
+      'return': 'boolean',
+    },
+    'isMobile': {
+      'return': 'boolean',
+    },
+    'isMsie': {
+      'return': 'boolean',
+    },
+    'isOpera': {
+      'return': 'boolean',
+    },
+    'isOperaMini': {
+      'return': 'boolean',
+    },
+    'isSafari': {
+      'return': 'boolean',
+    },
+    'isSupported': {
+      'return': 'boolean',
+    },
+    'isWindows': {
+      'return': 'boolean',
+    },
+    'isWindowsPhone': {
+      'return': 'boolean',
+    },
+  },</code></pre><h2>Testing</h2><h3>Unit test</h3><p><img src="https://exiguus.github.io/js.device.detector/static/device.detector.test.qunit.png" alt="test-unit"></p>
+<p><a href="https://github.com/exiguus/js.device.detector/blob/master/src/js/jquery.device.detector.test.js">QUnit</a> against the <a href="https://github.com/exiguus/js.device.detector/tree/master/dist">device.detector</a> with a <a href="https://exiguus.github.io/js.device.detector/coverage/">current coverage</a> of <code>97.52% Statements 157/161 86.96% Branches 40/46 100% Functions 51/51 97.44% Lines 152/156</code>.</p>
+<h3>Integration test</h3><p><img src="https://exiguus.github.io/js.device.detector/static/device.detector.test.casperjs.gif" alt="test-integration"></p>
+<p><a href="https://github.com/exiguus/js.device.detector/blob/master/tests/casper/browser.config.js">~40 User-Agent Strings</a> against the <a href="https://github.com/exiguus/js.device.detector/tree/master/dist">device.detector</a> to make sure different User-Agent Strings are correctly matched.</p></article>
     </section>
 
 
@@ -187,7 +354,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat May 26 2018 11:04:35 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat May 26 2018 12:50:46 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

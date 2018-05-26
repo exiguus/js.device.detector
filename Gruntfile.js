@@ -35,7 +35,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', [
     'clean',
     'build',
-    'copy',
+    'copy:dist',
     'strip_code',
     'comments',
     'usebanner',
