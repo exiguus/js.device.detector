@@ -17,6 +17,14 @@ module.exports = {
       '**',
     ],
   },
+  icov: {
+    cwd: '<%= paths.coverage %>/report-Icov/',
+    dest: '<%= paths.coverage %>/',
+    expand: true,
+    src: [
+      'Icov.info',
+    ],
+  },
   static: {
     cwd: '<%= paths.static %>/',
     dest: '<%= paths.docs %>/<%= paths.static %>/',

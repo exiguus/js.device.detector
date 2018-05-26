@@ -27,6 +27,11 @@ module.exports = function(grunt) {
    * TASKS
    */
 
+   grunt.registerTask('coverage', [
+     'copy:coverage',
+     'copy:icov',
+   ]);
+
   grunt.registerTask('build', [
     'eslint',
     'uglify',

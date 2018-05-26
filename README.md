@@ -19,7 +19,7 @@ npm install --save js.device.detector
 
 ```html
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/dist/jquery.device.detector.min.js"></script>
+<script src="../node_modules/js/device.detector/dist/jquery.device.detector.min.js"></script>
 <script>
   // init
   var d = $.fn.deviceDetector;

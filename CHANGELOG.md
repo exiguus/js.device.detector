@@ -1,7 +1,7 @@
 # Change Log
 ## 1.0.0
 ### Feature
-via jQuery Plugin:
+Add jQuery Plugin:
 * Detect Browser and Device Information
 * Detect Supported Devices and Browser by Browser Matrix
 * Detect mobile Browser
@@ -11,4 +11,4 @@ via jQuery Plugin:
 * Detect Windows Phone, Windows Mobile, iOS, Android and BlackBerry mobile Operating Systems
 * Detect Major, Minor and Bugfix OS Version
 * Detect Major Browser Version
-* Configure own Browser Information
+* Configure own Browser Matrix and Information
