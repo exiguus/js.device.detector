@@ -1,5 +1,13 @@
 # CasperJS
 [CasperJS](http://casperjs.org/) testing with [PhantomJS](http://phantomjs.org/)
+
+## Run test
+Running the test from project root:
+
+```
+node_modules/casperjs/bin/casperjs test ./tests/casper/init.js --path=/src/index.jquery.test.html
+```
+
 ## Integration test
 ![test-integration][test-integration]
 
