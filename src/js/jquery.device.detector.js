@@ -708,7 +708,7 @@
   var browserVersionString = // eslint-disable-line no-var
     ('' + browser.appVersion).toLowerCase();
   browserAgentString = ('' + browserAgentString).toLowerCase();
-  browserVersionString = browserAgentString;
+  browserVersionString = browserAgentString || browserVersionString;
 
   // config
   //

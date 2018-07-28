@@ -1,4 +1,8 @@
 # Change Log
+
+## 1.0.1
+* fix potential security vulnerability found in the serve dependency
+
 ## 1.0.0
 ### Feature
 Add jQuery Plugin:
