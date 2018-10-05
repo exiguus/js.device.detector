@@ -1,24 +1,23 @@
-module.exports = function(config) {
+module.exports = (config) => {
   config.set({
-    basePath: '',
     plugins: [
       'karma-phantomjs-launcher',
       'karma-coverage',
-      'karma-qunit',
-      'karma-jquery',
+      'karma-jasmine',
+      'karma-webpack',
     ],
-    frameworks: ['qunit', 'jquery-3.1.1'],
-    files: [
-      'src/js/jquery.device.detector.js',
-      'src/js/jquery.device.detector.test.js',
-    ],
+    frameworks: ['jasmine'],
+    files: [{
+      pattern: 'src/js/*.class.test.js',
+      watched: false,
+    }],
     browsers: ['PhantomJS'],
     reporters: ['progress', 'coverage'],
     preprocessors: {
-      'src/js/jquery.device.detector.js': ['coverage'],
+      'src/js/*.js': ['webpack', 'coverage'],
     },
     coverageReporter: {
-      dir: 'coverage/jquery',
+      dir: 'coverage/es6',
       reporters: [
         {type: 'html', subdir: 'report-html'},
         {type: 'lcov', subdir: 'report-lcov'},
@@ -28,6 +27,22 @@ module.exports = function(config) {
         {type: 'text', subdir: '.', file: 'text.txt'},
         {type: 'text-summary', subdir: '.', file: 'text-summary.txt'},
       ],
+    },
+    webpack: {
+      mode: 'production',
+      module: {
+        rules: [
+          // BABEL
+          {
+            test: /\.js$/,
+            loader: 'babel-loader',
+            exclude: /(node_modules)|^jquery\./,
+            options: {
+              compact: true,
+            },
+          },
+        ],
+      },
     },
   });
 };

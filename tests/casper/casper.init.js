@@ -33,7 +33,11 @@ var config = {
   'browsers': {},
 };
 // inject browserTestData
-phantom.injectJs(config.path + 'browser.config.js');
+if (casper.cli.options.custom !== undefined) {
+  phantom.injectJs(config.path + 'browser.custom.config.js');
+} else {
+  phantom.injectJs(config.path + 'browser.config.js');
+}
 config.browsers = getBrowserTestData();
 // inject helper
 phantom.injectJs(config.path + 'casper.helper.js');

@@ -5,6 +5,8 @@
 # js.device.detector
 jQuery Plugin to get Device and Browser Information like OS Name, Version or Browser Name, Version.
 
+Make your Visitor Browser, Device and OS Name and Version available in Javascript.
+
 The plugin can also discover mobile and desktop devices and a general browser support against a (pre) configured browser matrix.
 
 ## npm

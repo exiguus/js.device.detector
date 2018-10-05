@@ -1,0 +1,350 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+          <article>
+            <section>
+              <h2>User Agent String</h2>
+              <p><code id="useragent">User Agent String</code></p>
+              <h2>Browser</h2>
+              <dl>
+                <dt>Version</dt>
+                <dd><code id="browserVersion">Browser Version</code></dd>
+                <dt>Name</dt>
+                <dd><code id="browserName">Browser Name</code></dd>
+                <dt>Id</dt>
+                <dd><code id="browserId">Browser ID</code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Operating System</h2>
+              <dl>
+                <dt>Version</dt>
+                <dd><code id="osVersion">OS Version</code></dd>
+                <dt>Version Major</dt>
+                <dd><code id="osVersionMajor">OS Major Version</code></dd>
+                <dt>Version Minor</dt>
+                <dd><code id="osVersionMinor">OS Minor Version</code></dd>
+                <dt>Version Bugfix</dt>
+                <dd><code id="osVersionBugfix">OS Bugfix Version</code></dd>
+                <dt>Name</dt>
+                <dd><code id="osName">OS Name</code></dd>
+                <dt>Id</dt>
+                <dd><code id="osId">OS ID</code></dd>
+              </dl>
+              <dl>
+                <dt>Version String</dt>
+                <dd><code id="osVersionString">OS Version String</code></dd>
+                <dt>Version Categories</dt>
+                <dd><code id="osVersionCategories">OS Version Categories</code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>General</h2>
+              <dl>
+                <dt>Supported</dt>
+                <dd><code id="supported"></code></dd>
+                <dt>Mobile</dt>
+                <dd><code id="mobile"></code></dd>
+                <dt>Desktop</dt>
+                <dd><code id="desktop"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Apple</h2>
+              <dl>
+                <dt>Safari</dt>
+                <dd><code id="safari"></code></dd>
+                <dt>iPhone</dt>
+                <dd><code id="iphone"></code></dd>
+                <dt>iPad</dt>
+                <dd><code id="ipad"></code></dd>
+                <dt>iOS</dt>
+                <dd><code id="ios"></code></dd>
+                <dt>MacOS</dt>
+                <dd><code id="macos"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Google</h2>
+              <dl>
+                <dt>Chrome</dt>
+                <dd><code id="chrome"></code></dd>
+                <dt>Android</dt>
+                <dd><code id="android"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Mozilla</h2>
+              <dl>
+                <dt>Firefox</dt>
+                <dd><code id="firefox"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Microsoft</h2>
+              <dl>
+                <dt>Internet Explorer</dt>
+                <dd><code id="ie"></code></dd>
+                <dt>MSIE</dt>
+                <dd><code id="msie"></code></dd>
+                <dt>Edge</dt>
+                <dd><code id="edge"></code></dd>
+                <dt>IE Mobile</dt>
+                <dd><code id="ieMobile"></code></dd>
+                <dt>Windows Phone</dt>
+                <dd><code id="windowsPhone"></code></dd>
+                <dt>Windows</dt>
+                <dd><code id="windows"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Opera</h2>
+              <dl>
+                <dt>Opera</dt>
+                <dd><code id="opera"></code></dd>
+                <dt>Opera Mini</dt>
+                <dd><code id="operaMini"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Blackberry</h2>
+              <dl>
+                <dt>Blackberry</dt>
+                <dd><code id="blackberry"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>Other</h2>
+              <dl>
+                <dt>Linux</dt>
+                <dd><code id="linux"></code></dd>
+                <dt>BSD/Unix</dt>
+                <dd><code id="bsd"></code></dd>
+              </dl>
+            </section>
+            <section>
+              <h2>getInfo() Object</h2>
+              <pre>
+                <code id="info"></code>
+              </pre>
+            </section>
+            <section>
+              <h2>NPM</h2>
+              <dl>
+                <dt>installation</dt>
+                <dd><code>npm install js.device.detector --save</code></dd>
+              </dl>
+
+              <h2>GIT</h2>
+              <dl>
+                <dt>ZIP</dt>
+                <dd><a href="https://github.com/exiguus/js.device.detector/archive/v1.0.2.zip" title="Github Release ZIP"><code>https://github.com/exiguus/js.device.detector/archive/v1.0.2.zip</code></a></dd>
+                <dt>GZIP</dt>
+                <dd><a href="https://github.com/exiguus/js.device.detector/archive/v1.0.2.tar.gz" title="Github Release GZIP"><code>https://github.com/exiguus/js.device.detector/archive/v1.0.2.tar.gz</code></a></dd>
+
+              </dl>
+
+            </section>
+
+              <h2>Usage</h2>
+<pre>
+  <code>
+{{"<script src=\"../node_modules/jquery/dist/jquery.min.js\"></script>
+<script src=\"../node_modules/js/device.detector/dist/jquery.device.detector.min.js\"></script>
+<script>
+  // init
+  var d = $.fn.deviceDetector;
+  if (d.isDesktop()) {
+    alert(
+      'You are using ' +
+      d.getBrowserName() +
+      ' as Desktop Browser on ' +
+      d.getOsName() +
+      '.'
+    );
+  }
+  console.log(d.getInfo());
+  // return
+  // {
+  //     \"browserVersion\": 66,
+  //     \"browserName\": \"Google Chrome\",
+  //     \"browserId\": \"chrome\",
+  //     \"osVersion\": \"10_13_4\",
+  //     \"osVersionString\": \"10_13_4\",
+  //     \"osVersionCategories\": {
+  //         \"major\": 10,
+  //         \"minor\": 13,
+  //         \"bugfix\": 4
+  //     },
+  //     \"osVersionMajor\": 10,
+  //     \"osVersionMinor\": 13,
+  //     \"osVersionBugfix\": 4,
+  //     \"osName\": \"Apple Mac OS X\",
+  //     \"osId\": \"macos\",
+  //     \"supported\": true,
+  //     \"mobile\": false,
+  //     \"desktop\": true,
+  //     \"safari\": false,
+  //     \"iphone\": false,
+  //     \"ipad\": false,
+  //     \"ios\": false,
+  //     \"macos\": true,
+  //     \"chrome\": true,
+  //     \"android\": false,
+  //     \"firefox\": false,
+  //     \"ie\": false,
+  //     \"msie\": false,
+  //     \"edge\": false,
+  //     \"ieMobile\": false,
+  //     \"windowsPhone\": false,
+  //     \"windows\": false,
+  //     \"opera\": false,
+  //     \"operaMini\": false,
+  //     \"blackberry\": false,
+  //     \"linux\": false,
+  //     \"bsd\": false
+  // }
+</script>" | escape }}
+  </code>
+</pre>
+          </section>
+
+            <h2>Custom Usage</h2>
+<pre>
+<code>
+{{ "<script src=\"../node_modules/jquery/dist/jquery.min.js\"></script>
+<script src=\"../node_modules/js/device.detector/dist/jquery.device.detector.min.js\"></script>
+<script>
+  // default browser matrix
+  // {
+  //   'supports': {
+  //    'msie': {'id': 'msie', 'version': '11'},
+  //    'edge': {'id': 'edge', 'version': '12'},
+  //    'chrome': {'id': 'chrome', 'version': '66'},
+  //    'firefox': {'id': 'firefox', 'version': '60'},
+  //    'safari': {'id': 'safari', 'version': '11'},
+  //  },
+
+  // custom init
+
+  $.fn.deviceDetector(
+    {
+      'supports': {
+        'edge': {'id': 'edge', 'version': '12'},
+        'chrome': {'id': 'chrome', 'version': '72'},
+        'firefox': {'id': 'firefox', 'version': '68'},
+      },
+    }
+  );
+  var d = $.fn.deviceDetector;
+  console.log(d.isSupported()) // return true or false
+</script>" | escape }}
+</code>
+</pre>
+            <h2>Public available Methods</h2>
+<pre>
+<code>
+{{"'functions': {
+  'public': {
+    'getBrowserId': {
+      'return': 'string',
+    },
+    'getBrowserName': {
+      'return': 'string',
+    },
+    'getBrowserVersion': {
+      'return': 'number',
+    },
+    'getInfo': {
+      'return': 'object',
+    },
+    'getOsId': {
+      'return': 'string',
+    },
+    'getOsName': {
+      'return': 'string',
+    },
+    'getOsVersion': {
+      'return': 'string',
+    },
+    'getOsVersionBugfix': {
+      'return': 'number',
+    },
+    'getOsVersionCategories': {
+      'return': 'object',
+    },
+    'getOsVersionMinor': {
+      'return': 'number',
+    },
+    'getOsVersionMajor': {
+      'return': 'number',
+    },
+    'getOsVersionString': {
+      'return': 'string',
+    },
+    'isBlackberry': {
+      'return': 'boolean',
+    },
+    'isBsd': {
+      'return': 'boolean',
+    },
+    'isChrome': {
+      'return': 'boolean',
+    },
+    'isDesktop': {
+      'return': 'boolean',
+    },
+    'isEdge': {
+      'return': 'boolean',
+    },
+    'isFirefox': {
+      'return': 'boolean',
+    },
+    'isIe': {
+      'return': 'boolean',
+    },
+    'isIeMobile': {
+      'return': 'boolean',
+    },
+    'isIpad': {
+      'return': 'boolean',
+    },
+    'isIphone': {
+      'return': 'boolean',
+    },
+    'isLinux': {
+      'return': 'boolean',
+    },
+    'isMacos': {
+      'return': 'boolean',
+    },
+    'isMobile': {
+      'return': 'boolean',
+    },
+    'isMsie': {
+      'return': 'boolean',
+    },
+    'isOpera': {
+      'return': 'boolean',
+    },
+    'isOperaMini': {
+      'return': 'boolean',
+    },
+    'isSafari': {
+      'return': 'boolean',
+    },
+    'isSupported': {
+      'return': 'boolean',
+    },
+    'isWindows': {
+      'return': 'boolean',
+    },
+    'isWindowsPhone': {
+      'return': 'boolean',
+    },
+  }," | escape }}
+</code>
+</pre>
+          </section>
+          </article>
+{% endblock %}
