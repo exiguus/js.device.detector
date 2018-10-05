@@ -68,7 +68,7 @@
     "doc-example": "node ./example/server.js & echo $! > .pid; sleep 1 && node_modules/@remy/snap/cli/index.js http://localhost:3333 -o docs; kill $(cat .pid); rm .pid; cp -Rf ./example/static/img ./docs/static",
     "test": "npm run lint && npm run build && npm run test-unit && npm run test-integration",
     "test-unit": "npm run test-qunit-coverage && grunt coverage",
-    "test-integration": "npm run test-qunit && npm run test-qunit-dist && npm run test-qunit-dist-min && npm run http-server && sleep 10 && npm run test-casper-dist && npm run test-casper-dist-min && npm run http-server-stop",
+    "test-integration": "npm run test-qunit && npm run test-qunit-dist && npm run test-qunit-dist-min && npm run test-casper-dist-custom && npm run http-server && sleep 10 && npm run test-casper-dist && npm run test-casper-dist-min && npm run http-server-stop",
     "test-dev": "npm run http-server && sleep 3 && npm run test-casper-dev && npm run http-server-stop && npm run test-unit",
     "test-capture": "npm run http-server && sleep 3 && npm run test-casper-capture && npm run http-server-stop",
     "test-casper-dev": "node_modules/casperjs/bin/casperjs test ./tests/casper/casper.init.js --fuzz",
