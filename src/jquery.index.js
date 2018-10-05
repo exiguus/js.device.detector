@@ -1,7 +1,20 @@
 (function() {
-  $.fn.deviceDetector(
-    {'names': {'firefox': {'name': 'Custom Mozilla Firefox Name'}}}
-  );
+//   $.fn.deviceDetector(
+//     {'browsers':
+//       {'names':
+//         {'firefox':
+//           {'name': 'Custom Mozilla Firefox Name'},
+//         },
+//       },
+//       'supports': {
+//         'msie': {'id': 'msie', 'version': '11'},
+//         'edge': {'id': 'edge', 'version': '12'},
+//         'chrome': {'id': 'chrome', 'version': '66'},
+//         'firefox': {'id': 'firefox', 'version': '60'},
+//         'safari': {'id': 'safari', 'version': '11'},
+//       },
+//     }
+//   );
   var d = $.fn.deviceDetector; // eslint-disable-line no-var
   var userAgentString = navigator.userAgent || // eslint-disable-line no-var
     navigator.appVersion;
