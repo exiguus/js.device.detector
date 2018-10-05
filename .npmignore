@@ -5,6 +5,7 @@ static/
 target/
 tests/
 coverage/
+example/
 .git
 .babelrc
 .codeclimate.yml
