@@ -1,6 +1,6 @@
 {
   "name": "js.device.detector",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "jQuery Plugin which make your Visitor Browser, Device and OS Name and Version available in Javascript",
   "devDependencies": {
     "@remy/snap": "^1.1.1",

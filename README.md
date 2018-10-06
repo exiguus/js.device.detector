@@ -248,6 +248,6 @@ https://codeclimate.com/github/exiguus/js.device.detector/test_coverage
 [licenses-url]: https://img.shields.io/npm/l/js.device.detector.svg
 [licenses]: https://github.com/exiguus/js.device.detector
 
-[test-integration]: https://exiguus.github.io/js.device.detector/static/device.detector.test.casperjs.gif
+[test-integration]: https://exiguus.github.io/js.device.detector/jsdoc/static/device.detector.test.casperjs.gif
 
-[test-unit]: https://exiguus.github.io/js.device.detector/static/device.detector.test.qunit.png
+[test-unit]: https://exiguus.github.io/js.device.detector/jsdoc/static/device.detector.test.qunit.png
