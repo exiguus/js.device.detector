@@ -28,8 +28,8 @@ module.exports = function(grunt) {
    */
 
    grunt.registerTask('coverage', [
-     'copy:coverage',
-     'copy:icov',
+     'copy:coverageJquery',
+     'copy:icovJquery',
    ]);
 
   grunt.registerTask('build', [
