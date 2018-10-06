@@ -9,17 +9,17 @@ module.exports = {
       '<%= name.plugin %>.class.js',
     ],
   },
-  coverage: {
-    cwd: '<%= paths.coverage %>/report-html/',
-    dest: '<%= paths.jsdocs %>/<%= paths.coverage %>/',
+  coverageJquery: {
+    cwd: '<%= paths.coverage %>/jquery/report-html/',
+    dest: '<%= paths.jsdocs %>/<%= paths.coverage %>/jquery/',
     expand: true,
     src: [
       '**',
     ],
   },
-  icov: {
-    cwd: '<%= paths.coverage %>/report-Icov/',
-    dest: '<%= paths.coverage %>/',
+  icovJquery: {
+    cwd: '<%= paths.coverage %>/jquery/report-Icov/',
+    dest: '<%= paths.coverage %>/jquery/',
     expand: true,
     src: [
       'Icov.info',
