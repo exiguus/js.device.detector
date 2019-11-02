@@ -1,356 +1,401 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
-        <title>Device Detector jQuery Plugin Qunit Test Custom</title>
-        <style>
-          body {
-            color: black;
-            background-color: white;
-          }
-          article {
-            display: grid;
-            grid-gap: 1em;
-            grid-template-columns: repeat(8, 8em);
-            grid-template-rows: repeat(2);
-            align-content: space-around;
-            justify-content: space-between;
-          }
-          @media (max-width: 1200px) {
-            article {
-              grid-template-columns: repeat(8, 6em);
-            }
-          }
 
-          @media (max-width: 920px) {
-            body {
-              font-size: 120%;
-            }
-            article {
-              display: block;
-            }
-            section {
-              width: 25%;
-              float: left;
-            }
-            section:nth-child(6n+6) {
-              clear: left;
-            }
-            footer {
-              clear: left;
-              float: left;
-              width: 100%;
-            }
-          }
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
+  <title>Device Detector jQuery Plugin Qunit Test Custom</title>
+  <style>
+    body {
+      color: black;
+      background-color: white;
+    }
 
-          @media (max-width: 480px) {
-            section {
-              width: 50%;
-              float: left;
-            }
-            footer {
-              clear: left;
-              float: left;
-              width: 100%;
-            }
-          }
+    article {
+      display: grid;
+      grid-gap: 1em;
+      grid-template-columns: repeat(8, 8em);
+      grid-template-rows: repeat(2);
+      align-content: space-around;
+      justify-content: space-between;
+    }
 
-          header,
-          footer {
-            grid-column: 1/9;
-            margin-bottom: 2em;
-          }
-          header {
-            grid-row: 1;
-          }
-          footer {
-            grid-row: 3;
-          }
-          header dt,
-          header dd {
-            display: inline-block;
-          }
-          header dt {
-            background-color: ghostwhite;
-          }
-          header dd {
-            margin-bottom: 0;
-          }
-          header dd + dt {
-            margin-left: .8em;
-          }
-          header dl {
-            margin: 0;
-            padding: 1em .5em;
-          }
-          footer h3 {
-            color: gainsboro;
-          }
-          footer pre {
-            padding: .5em 2em;
-            background-color: whitesmoke;
-            border: 1px solid gainsboro;
-          }
-          section {
-            grid-row: 2;
-          }
-          dl {
-            margin: 0 0 2em 0;
-            padding: 0;
-            background-color: whitesmoke;
-          }
-          dt,
-          dd {
-            display: block;
-            font-family: monospace;
-          }
-          dt::after {
-            content: ":";
-          }
-          dt {
-            margin: 0;
-            padding: .5em;
-          }
-          dd {
-            margin: 0 0 1em 0;
-            padding: .5em 1em;
-            min-width: 3em;
-            text-align: center;
-            background-color: gainsboro;
-          }
-          dd[data-status="true"] {
-            background-color: green;
-          }
-          dd[data-status="false"] {
-            background-color: red;
-          }
-        </style>
-    </head>
-    <body>
-        <header>
-          <h1>Device Detector</h1>
-          <h2>jQuery Plugin</h2>
-          <h3>Qunit Tests</h3>
-        </header>
+    @media (max-width: 1200px) {
+      article {
+        grid-template-columns: repeat(8, 6em);
+      }
+    }
 
-        <div id="qunit"></div>
-        <div id="qunit-fixture"></div>
+    @media (max-width: 920px) {
+      body {
+        font-size: 120%;
+      }
 
-        <main>
-          <article>
-            <header>
-              <h2>Detect Browser, Devices and OS.</h2>
-              <p>
-                It also allows you to submit a Browser Matrix to validate supported Browser.
-              </p>
-              <h3>Browser</h3>
-              <dl>
-                <dt>Version</dt>
-                <dd id="browserVersion"></dd>
-                <dt>Name</dt>
-                <dd id="browserName"></dd>
-                <dt>Id</dt>
-                <dd id="browserId"></dd>
-              </dl>
-              <h3>Operating System</h3>
-              <dl>
-                <dt>Version</dt>
-                <dd id="osVersion"></dd>
-                <dt>Version Major</dt>
-                <dd id="osVersionMajor"></dd>
-                <dt>Version Minor</dt>
-                <dd id="osVersionMinor"></dd>
-                <dt>Version Bugfix</dt>
-                <dd id="osVersionBugfix"></dd>
-                <dt>Name</dt>
-                <dd id="osName"></dd>
-                <dt>Id</dt>
-                <dd id="osId"></dd>
-              </dl>
-              <dl>
-                <dt>Version String</dt>
-                <dd id="osVersionString"></dd>
-                <dt>Version Categories</dt>
-                <dd id="osVersionCategories"></dd>
-              </dl>
-              <h3>User-Agent</h3>
-              <p>
-                <code id="useragent"></code>
-              </p>
-            </header>
-            <section>
-              <h3>General</h3>
-              <dl>
-                <dt>Supported</dt>
-                <dd id="supported"></dd>
-                <dt>Mobile</dt>
-                <dd id="mobile"></dd>
-                <dt>Desktop</dt>
-                <dd id="desktop"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Apple</h3>
-              <dl>
-                <dt>Safari</dt>
-                <dd id="safari"></dd>
-                <dt>iPhone</dt>
-                <dd id="iphone"></dd>
-                <dt>iPad</dt>
-                <dd id="ipad"></dd>
-                <dt>iOS</dt>
-                <dd id="ios"></dd>
-                <dt>MacOS</dt>
-                <dd id="macos"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Google</h3>
-              <dl>
-                <dt>Chrome</dt>
-                <dd id="chrome"></dd>
-                <dt>Android</dt>
-                <dd id="android"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Mozilla</h3>
-              <dl>
-                <dt>Firefox</dt>
-                <dd id="firefox"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Microsoft</h3>
-              <dl>
-                <dt>Internet Explorer</dt>
-                <dd id="ie"></dd>
-                <dt>MSIE</dt>
-                <dd id="msie"></dd>
-                <dt>Edge</dt>
-                <dd id="edge"></dd>
-                <dt>IE Mobile</dt>
-                <dd id="ieMobile"></dd>
-                <dt>Windows Phone</dt>
-                <dd id="windowsPhone"></dd>
-                <dt>Windows</dt>
-                <dd id="windows"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Opera</h3>
-              <dl>
-                <dt>Opera</dt>
-                <dd id="opera"></dd>
-                <dt>Opera Mini</dt>
-                <dd id="operaMini"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Blackberry</h3>
-              <dl>
-                <dt>Blackberry</dt>
-                <dd id="blackberry"></dd>
-              </dl>
-            </section>
-            <section>
-              <h3>Other</h3>
-              <dl>
-                <dt>Linux</dt>
-                <dd id="linux"></dd>
-                <dt>BSD/Unix</dt>
-                <dd id="bsd"></dd>
-              </dl>
-            </section>
-            <footer>
-              <pre>
+      article {
+        display: block;
+      }
+
+      section {
+        width: 25%;
+        float: left;
+      }
+
+      section:nth-child(6n+6) {
+        clear: left;
+      }
+
+      footer {
+        clear: left;
+        float: left;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section {
+        width: 50%;
+        float: left;
+      }
+
+      footer {
+        clear: left;
+        float: left;
+        width: 100%;
+      }
+    }
+
+    header,
+    footer {
+      grid-column: 1/9;
+      margin-bottom: 2em;
+    }
+
+    header {
+      grid-row: 1;
+    }
+
+    footer {
+      grid-row: 3;
+    }
+
+    header dt,
+    header dd {
+      display: inline-block;
+    }
+
+    header dt {
+      background-color: ghostwhite;
+    }
+
+    header dd {
+      margin-bottom: 0;
+    }
+
+    header dd+dt {
+      margin-left: .8em;
+    }
+
+    header dl {
+      margin: 0;
+      padding: 1em .5em;
+    }
+
+    footer h3 {
+      color: gainsboro;
+    }
+
+    footer pre {
+      padding: .5em 2em;
+      background-color: whitesmoke;
+      border: 1px solid gainsboro;
+    }
+
+    section {
+      grid-row: 2;
+    }
+
+    dl {
+      margin: 0 0 2em 0;
+      padding: 0;
+      background-color: whitesmoke;
+    }
+
+    dt,
+    dd {
+      display: block;
+      font-family: monospace;
+    }
+
+    dt::after {
+      content: ":";
+    }
+
+    dt {
+      margin: 0;
+      padding: .5em;
+    }
+
+    dd {
+      margin: 0 0 1em 0;
+      padding: .5em 1em;
+      min-width: 3em;
+      text-align: center;
+      background-color: gainsboro;
+    }
+
+    dd[data-status="true"] {
+      background-color: green;
+    }
+
+    dd[data-status="false"] {
+      background-color: red;
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Device Detector</h1>
+    <h2>jQuery Plugin</h2>
+    <h3>Qunit Tests</h3>
+  </header>
+
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+  <main>
+    <article>
+      <header>
+        <h2>Detect Browser, Devices and OS.</h2>
+        <p>
+          It also allows you to submit a Browser Matrix to validate supported Browser.
+        </p>
+        <h3>Browser</h3>
+        <dl>
+          <dt>Version</dt>
+          <dd id="browserVersion"></dd>
+          <dt>Name</dt>
+          <dd id="browserName"></dd>
+          <dt>Id</dt>
+          <dd id="browserId"></dd>
+        </dl>
+        <h3>Operating System</h3>
+        <dl>
+          <dt>Version</dt>
+          <dd id="osVersion"></dd>
+          <dt>Version Major</dt>
+          <dd id="osVersionMajor"></dd>
+          <dt>Version Minor</dt>
+          <dd id="osVersionMinor"></dd>
+          <dt>Version Bugfix</dt>
+          <dd id="osVersionBugfix"></dd>
+          <dt>Name</dt>
+          <dd id="osName"></dd>
+          <dt>Id</dt>
+          <dd id="osId"></dd>
+        </dl>
+        <dl>
+          <dt>Version String</dt>
+          <dd id="osVersionString"></dd>
+          <dt>Version Categories</dt>
+          <dd id="osVersionCategories"></dd>
+        </dl>
+        <h3>User-Agent</h3>
+        <p>
+          <code id="useragent"></code>
+        </p>
+      </header>
+      <section>
+        <h3>General</h3>
+        <dl>
+          <dt>Supported</dt>
+          <dd id="supported"></dd>
+          <dt>Mobile</dt>
+          <dd id="mobile"></dd>
+          <dt>Desktop</dt>
+          <dd id="desktop"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Apple</h3>
+        <dl>
+          <dt>Safari</dt>
+          <dd id="safari"></dd>
+          <dt>iPhone</dt>
+          <dd id="iphone"></dd>
+          <dt>iPad</dt>
+          <dd id="ipad"></dd>
+          <dt>iOS</dt>
+          <dd id="ios"></dd>
+          <dt>MacOS</dt>
+          <dd id="macos"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Google</h3>
+        <dl>
+          <dt>Chrome</dt>
+          <dd id="chrome"></dd>
+          <dt>Android</dt>
+          <dd id="android"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Mozilla</h3>
+        <dl>
+          <dt>Firefox</dt>
+          <dd id="firefox"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Microsoft</h3>
+        <dl>
+          <dt>Internet Explorer</dt>
+          <dd id="ie"></dd>
+          <dt>MSIE</dt>
+          <dd id="msie"></dd>
+          <dt>Edge</dt>
+          <dd id="edge"></dd>
+          <dt>IE Mobile</dt>
+          <dd id="ieMobile"></dd>
+          <dt>Windows Phone</dt>
+          <dd id="windowsPhone"></dd>
+          <dt>Windows</dt>
+          <dd id="windows"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Opera</h3>
+        <dl>
+          <dt>Opera</dt>
+          <dd id="opera"></dd>
+          <dt>Opera Mini</dt>
+          <dd id="operaMini"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Blackberry</h3>
+        <dl>
+          <dt>Blackberry</dt>
+          <dd id="blackberry"></dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Other</h3>
+        <dl>
+          <dt>Linux</dt>
+          <dd id="linux"></dd>
+          <dt>BSD/Unix</dt>
+          <dd id="bsd"></dd>
+        </dl>
+      </section>
+      <footer>
+        <pre>
 <h3>getInfo() Object</h3>
 <code id="info"></code>
               </pre>
-          </article>
-        </main>
-        <script src="../node_modules/qunit/qunit/qunit.js"></script>
-        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="../dist/jquery.device.detector.js"></script>
-        <script>
-        (function() {
-          $.fn.deviceDetector(
-            {'browsers':
-              {'names':
-                {'firefox':
-                  {'name': 'Mozilla Firefox Custom'},
-                },
-              },
-              'supports': {
-                'msie': {'id': 'msie', 'version': '7'},
-                'edge': {'id': 'edge', 'version': '12'},
-                'chrome': {'id': 'chrome', 'version': '999'},
-                'firefox': {'id': 'firefox', 'version': '60'},
-                'safari': {'id': 'safari', 'version': '11'},
-              },
-            }
-          );
-          var d = $.fn.deviceDetector; // eslint-disable-line no-var
-          var userAgentString = navigator.userAgent || // eslint-disable-line no-var
-            navigator.appVersion;
-          $('#useragent').text(userAgentString);
-          // Info
-          $('#info').text(JSON.stringify(d.getInfo(), false, 4));
-          // General
-          $('#supported').text(d.isSupported());
-          $('#mobile').text(d.isMobile());
-          $('#desktop').text(d.isDesktop());
-          // Browser
-          $('#browserVersion').text(d.getBrowserVersion());
-          $('#browserName').text(d.getBrowserName());
-          $('#browserId').text(d.getBrowserId());
-          // OS
-          $('#osVersion').text(d.getOsVersion());
-          $('#osVersionString').text(d.getOsVersionString());
-          $('#osVersionCategories').text(JSON.stringify(d.getOsVersionCategories()));
-          $('#osVersionMajor').text(d.getOsVersionMajor());
-          $('#osVersionMinor').text(d.getOsVersionMinor());
-          $('#osVersionBugfix').text(d.getOsVersionBugfix());
-          $('#osName').text(d.getOsName());
-          $('#osId').text(d.getOsId());
-          // Apple
-          $('#safari').text(d.isSafari());
-          $('#iphone').text(d.isIphone());
-          $('#ipad').text(d.isIpad());
-          $('#ios').text(d.isIos());
-          $('#macos').text(d.isMacos());
-          // Google
-          $('#chrome').text(d.isChrome());
-          $('#android').text(d.isAndroid());
-          // Mozilla
-          $('#firefox').text(d.isFirefox());
-          // Microsoft
-          $('#ie').text(d.isIe());
-          $('#msie').text(d.isMsie());
-          $('#edge').text(d.isEdge());
-          $('#ieMobile').text(d.isIeMobile());
-          $('#windowsPhone').text(d.isWindowsPhone());
-          $('#windows').text(d.isWindows());
-          // Opera
-          $('#opera').text(d.isOpera());
-          $('#operaMini').text(d.isOperaMini());
-          // BlackBerry
-          $('#blackberry').text(d.isBlackberry);
-          // other
-          $('#linux').text(d.isLinux());
-          $('#bsd').text(d.isBsd());
-          $('dl dd').each(function() {
-            var _this = $(this); // eslint-disable-line no-var, no-invalid-this
-            var status = _this.text(); // eslint-disable-line no-var
-            _this.attr('data-status', status);
-          });
-        })();
-        </script>
-        <script src="js/jquery.device.detector.test.js"></script>
-    </body>
+      </footer>
+    </article>
+  </main>
+  <script src="../node_modules/qunit/qunit/qunit.js"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../dist/jquery.device.detector.js"></script>
+  <script>
+    (function () {
+      $.fn.deviceDetector({
+        'browsers': {
+          'names': {
+            'firefox': {
+              'name': 'Mozilla Firefox Custom'
+            },
+          },
+        },
+        'supports': {
+          'msie': {
+            'id': 'msie',
+            'version': '7'
+          },
+          'edge': {
+            'id': 'edge',
+            'version': '12'
+          },
+          'chrome': {
+            'id': 'chrome',
+            'version': '999'
+          },
+          'firefox': {
+            'id': 'firefox',
+            'version': '60'
+          },
+          'safari': {
+            'id': 'safari',
+            'version': '11'
+          },
+        },
+      });
+      var d = $.fn.deviceDetector; // eslint-disable-line no-var
+      var userAgentString = navigator.userAgent || // eslint-disable-line no-var
+        navigator.appVersion;
+      $('#useragent').text(userAgentString);
+      // Info
+      $('#info').text(JSON.stringify(d.getInfo(), false, 4));
+      // General
+      $('#supported').text(d.isSupported());
+      $('#mobile').text(d.isMobile());
+      $('#desktop').text(d.isDesktop());
+      // Browser
+      $('#browserVersion').text(d.getBrowserVersion());
+      $('#browserName').text(d.getBrowserName());
+      $('#browserId').text(d.getBrowserId());
+      // OS
+      $('#osVersion').text(d.getOsVersion());
+      $('#osVersionString').text(d.getOsVersionString());
+      $('#osVersionCategories').text(JSON.stringify(d.getOsVersionCategories()));
+      $('#osVersionMajor').text(d.getOsVersionMajor());
+      $('#osVersionMinor').text(d.getOsVersionMinor());
+      $('#osVersionBugfix').text(d.getOsVersionBugfix());
+      $('#osName').text(d.getOsName());
+      $('#osId').text(d.getOsId());
+      // Apple
+      $('#safari').text(d.isSafari());
+      $('#iphone').text(d.isIphone());
+      $('#ipad').text(d.isIpad());
+      $('#ios').text(d.isIos());
+      $('#macos').text(d.isMacos());
+      // Google
+      $('#chrome').text(d.isChrome());
+      $('#android').text(d.isAndroid());
+      // Mozilla
+      $('#firefox').text(d.isFirefox());
+      // Microsoft
+      $('#ie').text(d.isIe());
+      $('#msie').text(d.isMsie());
+      $('#edge').text(d.isEdge());
+      $('#ieMobile').text(d.isIeMobile());
+      $('#windowsPhone').text(d.isWindowsPhone());
+      $('#windows').text(d.isWindows());
+      // Opera
+      $('#opera').text(d.isOpera());
+      $('#operaMini').text(d.isOperaMini());
+      // BlackBerry
+      $('#blackberry').text(d.isBlackberry);
+      // other
+      $('#linux').text(d.isLinux());
+      $('#bsd').text(d.isBsd());
+      $('dl dd').each(function () {
+        var _this = $(this); // eslint-disable-line no-var, no-invalid-this
+        var status = _this.text(); // eslint-disable-line no-var
+        _this.attr('data-status', status);
+      });
+    })();
+
+  </script>
+  <script src="js/jquery.device.detector.test.js"></script>
+</body>
+
 </html>

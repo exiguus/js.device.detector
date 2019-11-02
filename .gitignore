@@ -3,7 +3,7 @@
 node_modules/
 bower_components/
 coverage/
-!docs/coverage/
+!docs/coverage/**
 TODO.md
 Thumbs.db
 .DS_Store

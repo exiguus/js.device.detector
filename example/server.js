@@ -8,24 +8,42 @@ const expressNunjucks = require('express-nunjucks');
 
 const compression = require('compression');
 const minify = require('express-minify');
+const minifyHTML = require('express-minify-html');
+
+const favicon = require('serve-favicon');
 
 app.use(compression());
-app.use(minify(
-    {
-      cache: false,
-      uglifyJsModule: null,
-      errorHandler: null,
-      cssMatch: /css/,
-    }
-  )
-);
+app.use(minify({
+  cache: false,
+  uglifyJsModule: null,
+  errorHandler: null,
+  cssMatch: /css/,
+}));
+app.use(function (req, res, next) {
+  if (/\.min\.(css|js)$/.test(req.url)) {
+    res.minifyOptions = res.minifyOptions || {};
+    res.minifyOptions.minify = false;
+  }
+  next();
+});
+app.use(minifyHTML({
+  override: true,
+  exception_url: false,
+  htmlMinifier: {
+    maxLineLength: 96,
+    collapseBooleanAttributes: true,
+    collapseWhitespace: true,
+    decodeEntities: true,
+    keepClosingSlash: true,
+    sortAttributes: true,
+    minifyCSS: true,
+    minifyJS: true,
+  },
+}));
+app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 app.use(
   '/static',
   express.static(path.join(__dirname, 'static'))
-);
-app.use(
-  '/static/js/jquery',
-  express.static(path.join(__dirname, '../node_modules/jquery'))
 );
 app.use(
   '/static/js/js.device.detector',
@@ -37,16 +55,16 @@ app.set('port', process.env.PORT || 3333);
 app.set('views', __dirname + '/views');
 
 const njk = expressNunjucks(app, { // eslint-disable-line no-unused-vars
-    watch: isDev,
-    noCache: isDev,
+  watch: isDev,
+  noCache: isDev,
 });
 
 app.get('/', (req, res) => {
-    res.render('index');
+  res.render('index');
 });
 
-app.listen(app.get('port'), function() {
-    console.log( // eslint-disable-line no-console
-      'Server started on port', app.get('port')
-    );
+app.listen(app.get('port'), function () {
+  console.log( // eslint-disable-line no-console
+    'Server started on port', app.get('port')
+  );
 });

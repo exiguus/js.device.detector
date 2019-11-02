@@ -3,7 +3,7 @@
   jQuery Plugin to get Device and Browser informations
  * @author Simon Gattner <npm@0x38.de>
  * @license MIT
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 /**

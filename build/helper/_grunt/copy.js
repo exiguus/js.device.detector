@@ -9,12 +9,28 @@ module.exports = {
       '<%= name.plugin %>.class.js',
     ],
   },
+  coverageEs6: {
+    cwd: '<%= paths.coverage %>/es6/report-html/',
+    dest: '<%= paths.jsdocs %>/<%= paths.coverage %>/es6/',
+    expand: true,
+    src: [
+      '**',
+    ],
+  },
   coverageJquery: {
     cwd: '<%= paths.coverage %>/jquery/report-html/',
     dest: '<%= paths.jsdocs %>/<%= paths.coverage %>/jquery/',
     expand: true,
     src: [
       '**',
+    ],
+  },
+  icovEs6: {
+    cwd: '<%= paths.coverage %>/es6/report-Icov/',
+    dest: '<%= paths.coverage %>/es6/',
+    expand: true,
+    src: [
+      'Icov.info',
     ],
   },
   icovJquery: {

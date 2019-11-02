@@ -28,12 +28,15 @@ module.exports = function(grunt) {
    */
 
    grunt.registerTask('coverage', [
+     'copy:coverageEs6',
+     'copy:icovEs6',
      'copy:coverageJquery',
      'copy:icovJquery',
    ]);
 
   grunt.registerTask('build', [
     'eslint',
+    'webpack',
     'uglify',
   ]);
 

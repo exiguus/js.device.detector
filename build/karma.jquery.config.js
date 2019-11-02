@@ -9,16 +9,16 @@ module.exports = function(config) {
     ],
     frameworks: ['qunit', 'jquery-3.1.1'],
     files: [
-      'src/js/jquery.device.detector.js',
-      'src/js/jquery.device.detector.test.js',
+      '../src/js/jquery.device.detector.js',
+      '../src/js/jquery.device.detector.test.js',
     ],
     browsers: ['PhantomJS'],
     reporters: ['progress', 'coverage'],
     preprocessors: {
-      'src/js/jquery.device.detector.js': ['coverage'],
+      '../src/js/jquery.device.detector.js': ['coverage'],
     },
     coverageReporter: {
-      dir: 'coverage/jquery',
+      dir: '../coverage/jquery',
       reporters: [
         {type: 'html', subdir: 'report-html'},
         {type: 'lcov', subdir: 'report-lcov'},
